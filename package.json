@@ -1,0 +1,41 @@
+{
+  "name": "launch.io",
+  "description": "A Simple, Predictable React State Management Library",
+  "version": "0.5.0",
+  "author": {
+    "name": "Jeremiah Billmann",
+    "email": "jbillmann@gmail.com",
+    "url": "https://www.jbillmann.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jbillmann/launch.io.git"
+  },
+  "license": "MIT",
+  "keywords": [
+    "react",
+    "reactjs",
+    "reducer",
+    "redux"
+  ],
+  "main": "dist/launch.io.js",
+  "scripts": {
+    "lint": "npx eslint src/",
+    "build": "rm -rf dist && webpack"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "eslint": "^7.8.1",
+    "eslint-plugin-react": "^7.20.6",
+    "prettier-eslint": "^11.0.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  }
+}

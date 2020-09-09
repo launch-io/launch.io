@@ -1,5 +1,5 @@
 import Provider from "./components/Provider";
 import createServiceApi from "./utils/createServiceApi";
-import useLibrary from "./hooks/useLibrary";
+import useLaunch from "./hooks/useLaunch";
 
-export { Provider, createServiceApi, useLibrary };
+export { Provider, createServiceApi, useLaunch };

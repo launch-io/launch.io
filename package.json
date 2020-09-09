@@ -28,8 +28,7 @@
     "lint": "npx eslint src/",
     "build": "rm -rf dist && webpack"
   },
-  "dependencies": {
-    "prop-types": "^15.7.2",
+  "peerDependencies": {
     "react": "^16.13.1"
   },
   "devDependencies": {

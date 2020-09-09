@@ -1,10 +1,10 @@
+/* eslint-disable react/prop-types */
 import React from "react";
-import PropTypes from "prop-types";
 import Context from "./Context";
-import useLibraryReducer from "../hooks/useLibraryReducer";
+import useLaunchReducer from "../hooks/useLaunchReducer";
 
 const Provider = ({ serviceApi, children }) => {
-  const [state, dispatch] = useLibraryReducer(
+  const [state, dispatch] = useLaunchReducer(
     serviceApi.reducer,
     serviceApi.initialState
   );
@@ -14,11 +14,6 @@ const Provider = ({ serviceApi, children }) => {
       {children}
     </Context.Provider>
   );
-};
-
-Provider.propTypes = {
-  serviceApi: PropTypes.object.isRequired,
-  children: PropTypes.object,
 };
 
 export default Provider;

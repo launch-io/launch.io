@@ -16,22 +16,22 @@ export default (services, options = {}) => {
 
     if (!service.name) {
       throw new Error(
-        `[Library]: service at [${index}] must contain a name property.`
+        `[Launch.IO]: service at [${index}] must contain a name property.`
       );
     }
     if (!service.initialState) {
       throw new Error(
-        `[Library]: ${service.name} must contain an initialState object.`
+        `[Launch.IO]: ${service.name} must contain an initialState object.`
       );
     }
     if (!service.actions || service.actions.length === 0) {
       throw new Error(
-        `[Library]: ${service.name} must contain an array of actions.`
+        `[Launch.IO]: ${service.name} must contain an array of actions.`
       );
     }
     if (actions[service.name]) {
       throw new Error(
-        `[Library]: Service with a name of ${service.name} already exists.`
+        `[Launch.IO]: Service with a name of ${service.name} already exists.`
       );
     }
 

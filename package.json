@@ -1,7 +1,7 @@
 {
   "name": "launch.io",
-  "description": "A Simple, Predictable React State Management Library",
-  "version": "0.5.0",
+  "description": "An Uncompliacted, Dependency Free, and Predictable React State Management Library",
+  "version": "0.7.0",
   "author": {
     "name": "Jeremiah Billmann",
     "email": "jbillmann@gmail.com",

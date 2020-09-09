@@ -22,7 +22,7 @@ export default (actions, actionFunctions) => (state, action) => {
   if (updatedState) {
     newState[action.serviceName] = updatedState;
     newState._history = history.actions.add(
-      { state: state._history, actions, launch: action.dispatch },
+      { state: state._history },
       {
         state,
         action: {

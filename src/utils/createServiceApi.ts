@@ -1,7 +1,7 @@
 import reducer from "./reducer";
 import history from "../services/history";
 
-export default (services, options = {}) => {
+export default (services, options = { enableTimeTravel: false }) => {
   const allServices = [
     ...services,
     ...(options.enableTimeTravel ? [history] : []),

@@ -1,7 +1,7 @@
 const path = require("path");
 
 module.exports = {
-  entry: "./src/index.js",
+  entry: "./src/index.ts",
   mode: "development",
   devtool: "inline-source-map",
   output: {
@@ -15,9 +15,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.tsx?$/,
+        use: "ts-loader",
         exclude: /node_modules/,
-        use: "babel-loader",
       },
     ],
   },
@@ -25,6 +25,7 @@ module.exports = {
     alias: {
       react: path.join(__dirname, "./node_modules/react"),
     },
+    extensions: [".ts", ".tsx", ".js"],
   },
   externals: {
     react: {

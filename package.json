@@ -16,7 +16,12 @@
     "react",
     "reactjs",
     "reducer",
-    "redux"
+    "state",
+    "predictable",
+    "functional",
+    "immutable",
+    "time",
+    "travel"
   ],
   "main": "dist/launch.io.js",
   "scripts": {

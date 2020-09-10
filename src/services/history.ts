@@ -4,7 +4,7 @@ const initialState = {
   future: [],
 };
 
-const getFunction = (actionFunctions, action) => {
+const getActionFunction = (actionFunctions, action) => {
   const service = actionFunctions[action.serviceName];
   return service[action.actionName];
 };
@@ -13,7 +13,7 @@ const getNewState = (initialState, actions, actionFunctions) => {
   const newState = { ...initialState };
 
   actions.forEach((action) => {
-    const actionFunction = getFunction(actionFunctions, action);
+    const actionFunction = getActionFunction(actionFunctions, action);
     newState[action.serviceName] = actionFunction(
       {
         state: newState[action.serviceName],
@@ -76,10 +76,10 @@ const actions = {
   },
   add: ({ state }, newAction) => {
     return {
-      initialGlobalState: state.initialGlobalState
-        ? state.initialGlobalState
+      initialGlobalState: state._history.initialGlobalState
+        ? state._history.initialGlobalState
         : newAction.state,
-      past: [...state.past, newAction.action],
+      past: [...state._history.past, newAction.action],
       future: [],
     };
   },

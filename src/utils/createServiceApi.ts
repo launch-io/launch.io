@@ -6,12 +6,12 @@ export default (services, options = { enableTimeTravel: false }) => {
     ...services,
     ...(options.enableTimeTravel ? [history] : []),
   ];
-  let initialState = {},
+  const initialState = {},
     actions = {},
     actionFunctions = {};
 
   allServices.forEach((service, index) => {
-    let serviceActions = {},
+    const serviceActions = {},
       serviceActionFunctions = {};
 
     if (!service.name) {

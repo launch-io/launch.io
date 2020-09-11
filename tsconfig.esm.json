@@ -3,6 +3,7 @@
     "outDir": "./dist/esm",
     "module": "es6",
     "target": "es5",
+    "lib": ["es6"],
     "jsx": "react",
     "allowJs": true,
     "noImplicitAny": false,

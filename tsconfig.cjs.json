@@ -3,6 +3,7 @@
     "outDir": "./dist/cjs",
     "module": "commonjs",
     "target": "es5",
+    "lib": ["es6"],
     "jsx": "react",
     "allowJs": true,
     "noImplicitAny": false,

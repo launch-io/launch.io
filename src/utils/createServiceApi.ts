@@ -1,5 +1,6 @@
 import reducer from "./reducer";
 import history from "../services/history";
+import { Service, ServiceOption, ServiceApi } from "../types";
 
 /**
  * Takes an array of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component.
@@ -7,7 +8,10 @@ import history from "../services/history";
  * @param {Object} options A Launch.IO options object.
  * @param {Boolean} options.enableTimeTravel Enabled Launch.IO Time Travel Debugging.
  */
-const createServiceApi = (services, options = { enableTimeTravel: false }) => {
+const createServiceApi = (
+  services: Service[],
+  options: ServiceOption = { enableTimeTravel: false }
+): ServiceApi => {
   const allServices = [
     ...services,
     ...(options.enableTimeTravel ? [history] : []),
@@ -30,9 +34,9 @@ const createServiceApi = (services, options = { enableTimeTravel: false }) => {
         `[Launch.IO]: ${service.name} must contain an initialState object.`
       );
     }
-    if (!service.actions || service.actions.length === 0) {
+    if (!service.actions) {
       throw new Error(
-        `[Launch.IO]: ${service.name} must contain an array of actions.`
+        `[Launch.IO]: ${service.name} must contain an array of action functions.`
       );
     }
     if (actionCreators[service.name]) {

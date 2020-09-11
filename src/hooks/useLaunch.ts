@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import Context from "../components/Context";
+import { LaunchContext } from "../types";
 
 /**
  * Returns a Launch.IO object containing current state, actions, and the launch function.
@@ -18,7 +19,7 @@ import Context from "../components/Context";
  *
  * @return {{state: Object, actions: Object, launch: Function}} A Launch.IO object containing the current state, and object of service actions functions, and a launch function
  */
-const useLaunch = () => {
+const useLaunch = <A, L>(): LaunchContext<A, L> => {
   const context = useContext(Context);
 
   return {

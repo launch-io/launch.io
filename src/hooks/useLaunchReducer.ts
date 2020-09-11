@@ -1,6 +1,6 @@
 import { useReducer, useCallback } from "react";
 
-export default (reducer, initialState) => {
+export default (reducer: (state, action) => any, initialState) => {
   const [state, dispatch] = useReducer(reducer, initialState);
 
   const customDispatch = useCallback((action) => {

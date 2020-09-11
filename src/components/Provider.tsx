@@ -2,6 +2,7 @@
 import React from "react";
 import Context from "./Context";
 import useLaunchReducer from "../hooks/useLaunchReducer";
+import { ServiceApi } from "../types";
 
 /**
  * This component should wrap your application and the Launch.IO createServiceApi should be
@@ -9,7 +10,10 @@ import useLaunchReducer from "../hooks/useLaunchReducer";
  *
  * @return Launch.IO Provider React Component
  * */
-const Provider = ({ serviceApi, children }) => {
+const Provider: React.FC<{ serviceApi: ServiceApi }> = ({
+  serviceApi,
+  children,
+}) => {
   const [state, dispatch] = useLaunchReducer(
     serviceApi.reducer,
     serviceApi.initialState

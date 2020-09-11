@@ -3,6 +3,7 @@ import React from "react";
 import Context from "./Context";
 import useLaunchReducer from "../hooks/useLaunchReducer";
 
+/** Returns a Launch.IO Provider React Component to wrap your application with. */
 const Provider = ({ serviceApi, children }) => {
   const [state, dispatch] = useLaunchReducer(
     serviceApi.reducer,

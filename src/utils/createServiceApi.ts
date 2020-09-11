@@ -1,7 +1,8 @@
 import reducer from "./reducer";
 import history from "../services/history";
 
-export default (services, options = { enableTimeTravel: false }) => {
+/** Takes an array of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component. */
+const createServiceApi = (services, options = { enableTimeTravel: false }) => {
   const allServices = [
     ...services,
     ...(options.enableTimeTravel ? [history] : []),
@@ -56,3 +57,5 @@ export default (services, options = { enableTimeTravel: false }) => {
     reducer: reducer(actionCreators, actionFunctions),
   };
 };
+
+export default createServiceApi;

@@ -1,7 +1,8 @@
 import { useContext } from "react";
 import Context from "../components/Context";
 
-export default () => {
+/** Returns a Launch.IO object containing current state, actions, and launch. */
+const useLaunch = () => {
   const context = useContext(Context);
 
   return {
@@ -10,3 +11,5 @@ export default () => {
     launch: context.dispatch,
   };
 };
+
+export default useLaunch;

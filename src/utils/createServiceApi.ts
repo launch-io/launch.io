@@ -7,7 +7,7 @@ export default (services, options = { enableTimeTravel: false }) => {
     ...(options.enableTimeTravel ? [history] : []),
   ];
   const initialState = {},
-    actions = {},
+    actionCreators = {},
     actionFunctions = {};
 
   allServices.forEach((service, index) => {
@@ -29,7 +29,7 @@ export default (services, options = { enableTimeTravel: false }) => {
         `[Launch.IO]: ${service.name} must contain an array of actions.`
       );
     }
-    if (actions[service.name]) {
+    if (actionCreators[service.name]) {
       throw new Error(
         `[Launch.IO]: Service with a name of ${service.name} already exists.`
       );
@@ -46,13 +46,13 @@ export default (services, options = { enableTimeTravel: false }) => {
       serviceActionFunctions[actionKey] = service.actions[actionKey];
     });
 
-    actions[service.name] = serviceActions;
+    actionCreators[service.name] = serviceActions;
     actionFunctions[service.name] = serviceActionFunctions;
   });
 
   return {
     initialState,
-    actions,
-    reducer: reducer(actions, actionFunctions),
+    actions: actionCreators,
+    reducer: reducer(actionCreators, actionFunctions),
   };
 };

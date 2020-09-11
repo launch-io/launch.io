@@ -1,6 +1,6 @@
 import history from "../services/history";
 
-export default (actions, actionFunctions) => (state, action) => {
+export default (actionCreators, actionFunctions) => (state, action) => {
   const service = actionFunctions[action.serviceName],
     actionFunction = service[action.actionName];
   let newState = { ...state };
@@ -13,7 +13,7 @@ export default (actions, actionFunctions) => (state, action) => {
   const updatedState = actionFunction(
     {
       state: state[action.serviceName],
-      actions: actions[action.serviceName],
+      actions: actionCreators[action.serviceName],
       launch: action.launch,
     },
     action.payload

@@ -19,7 +19,7 @@ import { LaunchContext } from "../types";
  *
  * @return {{state: Object, actions: Object, launch: Function}} A Launch.IO object containing the current state, and object of service actions functions, and a launch function
  */
-const useLaunch = <A, L>(): LaunchContext<A, L> => {
+const useLaunch = (): LaunchContext => {
   const context = useContext(Context);
 
   return {

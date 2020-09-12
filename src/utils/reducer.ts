@@ -1,12 +1,20 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import history from "../services/history";
+import { ActionCreators, ActionFunctions, Action } from "../types";
 
-export default (actionCreators, actionFunctions) => (state, action) => {
+export default (
+  actionCreators: ActionCreators,
+  actionFunctions: ActionFunctions
+) => (state: any, action: Action): any => {
   const service = actionFunctions[action.serviceName],
     actionFunction = service[action.actionName];
   let newState = { ...state };
 
   if (action.serviceName === history.name) {
-    newState = actionFunction({ state }, actionFunctions);
+    newState = actionFunction(
+      { state, actions: actionCreators[history.name], launch: action.launch },
+      actionFunctions
+    );
     return newState;
   }
 
@@ -22,7 +30,11 @@ export default (actionCreators, actionFunctions) => (state, action) => {
   if (updatedState) {
     newState[action.serviceName] = updatedState;
     newState._history = history.actions.add(
-      { state },
+      {
+        state,
+        actions: actionCreators[history.name],
+        launch: action.launch,
+      },
       {
         state,
         action: {

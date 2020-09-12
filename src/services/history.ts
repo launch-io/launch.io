@@ -1,15 +1,35 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import {
+  ActionFunctions,
+  ActionCreator,
+  Action,
+  LaunchAction,
+  ActionFunctionContext,
+} from "../types";
+
 const initialState = {
   initialGlobalState: null,
   past: [],
   future: [],
 };
 
-const getActionFunction = (actionFunctions, action) => {
+const getActionFunction = (
+  actionFunctions: ActionFunctions,
+  action: Action
+) => {
   const service = actionFunctions[action.serviceName];
   return service[action.actionName];
 };
 
-const getNewState = (initialState, actions, actionFunctions) => {
+const getNewState = (
+  initialState: any,
+  actions: Action[],
+  actionFunctions: ActionFunctions,
+  actionCreator: {
+    [actionName: string]: ActionCreator;
+  },
+  launch: LaunchAction
+) => {
   const newState = { ...initialState };
 
   actions.forEach((action) => {
@@ -17,6 +37,8 @@ const getNewState = (initialState, actions, actionFunctions) => {
     newState[action.serviceName] = actionFunction(
       {
         state: newState[action.serviceName],
+        actions: actionCreator,
+        launch,
       },
       action.payload
     );
@@ -26,7 +48,10 @@ const getNewState = (initialState, actions, actionFunctions) => {
 };
 
 const actions = {
-  stepBack: ({ state }, actionFunctions) => {
+  stepBack: (
+    { state, actions, launch }: ActionFunctionContext,
+    actionFunctions: ActionFunctions
+  ): any => {
     if (state._history.past.length === 0) {
       return state;
     }
@@ -39,7 +64,9 @@ const actions = {
     const newState = getNewState(
       { ...state._history.initialGlobalState },
       newPast,
-      actionFunctions
+      actionFunctions,
+      actions,
+      launch
     );
 
     return {
@@ -51,7 +78,10 @@ const actions = {
       },
     };
   },
-  stepForward: ({ state }, actionFunctions) => {
+  stepForward: (
+    { state, actions, launch }: ActionFunctionContext,
+    actionFunctions: ActionFunctions
+  ): any => {
     if (state._history.future.length === 0) {
       return state;
     }
@@ -62,7 +92,9 @@ const actions = {
     const newState = getNewState(
       { ...state._history.initialGlobalState },
       newPast,
-      actionFunctions
+      actionFunctions,
+      actions,
+      launch
     );
 
     return {
@@ -74,7 +106,7 @@ const actions = {
       },
     };
   },
-  add: ({ state }, newAction) => {
+  add: ({ state }: ActionFunctionContext, newAction: any): any => {
     return {
       initialGlobalState: state._history.initialGlobalState
         ? state._history.initialGlobalState

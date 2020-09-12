@@ -4,53 +4,68 @@ export interface ServiceOption {
   enableTimeTravel: boolean;
 }
 
-export interface Action<T> {
+export interface Action {
   serviceName: string;
   actionName: string;
-  payload: T;
+  payload?: any;
+  launch?: LaunchAction;
 }
 
 export interface ServiceApi {
   initialState: {
-    [key: string]: any;
+    [serviceName: string]: any;
   };
   actions: {
-    [key: string]: {
-      [key: string]: ActionCreator<any>;
+    [serviceName: string]: {
+      [actionName: string]: ActionCreator;
     };
   };
-  reducer: <T, S>(state: T, action: Action<S>) => T;
+  reducer: (state: any, action: Action) => any;
 }
 
-export type ServiceFunction = (
-  context: ServiceFunctionContext,
-  payload: any
+export interface ActionFunctionContext {
+  state: any;
+  actions: {
+    [actionName: string]: ActionCreator;
+  };
+  launch: LaunchAction;
+}
+
+export type ActionFunction = (
+  context: ActionFunctionContext,
+  payload?: any
 ) => any;
 
 export interface Service {
   name: string;
   initialState: any;
   actions: {
-    [key: string]: ServiceFunction;
+    [actionName: string]: ActionFunction;
   };
 }
 
-export type ActionCreator<T> = (payload: T) => Action<T>;
+export type ActionCreator = (payload?: any) => Action;
 
-export interface LaunchContext<A, L> {
+export type LaunchAction = (ActionCreator: any) => void;
+
+export interface LaunchContext {
   state: any;
   actions: {
-    [key: string]: ActionCreator<A>;
+    [serviceName: string]: {
+      [actionName: string]: ActionCreator;
+    };
   };
-  launch: LaunchAction<L>;
+  launch: LaunchAction;
 }
 
-export type LaunchAction<T> = (ActionCreator: T) => any;
-
-interface ServiceFunctionContext {
-  state: any;
-  actions: {
-    [key: string]: ActionCreator<any>;
+export interface ActionFunctions {
+  [serviceName: string]: {
+    [actionName: string]: ActionFunction;
   };
-  launch: any;
+}
+
+export interface ActionCreators {
+  [serviceName: string]: {
+    [actionName: string]: ActionCreator;
+  };
 }

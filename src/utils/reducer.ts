@@ -1,13 +1,15 @@
+/* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import history from "../services/history";
+
 import { ActionCreators, ActionFunctions, Action } from "../types";
+import history from "../services/history";
+import { getActionFunction } from "../utils/helpers";
 
 export default (
   actionCreators: ActionCreators,
   actionFunctions: ActionFunctions
 ) => (state: any, action: Action): any => {
-  const service = actionFunctions[action.serviceName],
-    actionFunction = service[action.actionName];
+  const actionFunction = getActionFunction(actionFunctions, action);
   let newState = { ...state };
 
   if (action.serviceName === history.name) {

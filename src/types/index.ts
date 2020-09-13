@@ -20,7 +20,7 @@ export interface ServiceApi {
       [actionName: string]: ActionCreator;
     };
   };
-  reducer: (state: any, action: Action) => any;
+  reducer: Reducer;
 }
 
 export interface ActionFunctionContext {
@@ -48,6 +48,8 @@ export type ActionCreator = (payload?: any) => Action;
 
 export type LaunchAction = (ActionCreator: any) => void;
 
+export type LaunchDispatch = [any, (action: Action) => void];
+
 export interface LaunchContext {
   state: any;
   actions: {
@@ -69,3 +71,5 @@ export interface ActionCreators {
     [actionName: string]: ActionCreator;
   };
 }
+
+export type Reducer = (state: any, action: Action) => any;

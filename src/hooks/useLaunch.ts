@@ -3,17 +3,17 @@ import Context from "../components/Context";
 import { LaunchContext } from "../types";
 
 /**
- * Returns a Launch.IO object containing current state, actions, and the launch function.
+ * Returns a Launch.IO object containing current `state`, `actions`, and the `launch` function.
  *
- * State is an object that will contain your full application state, across all services provided,
+ * `state` is an object that will contain your full application state, across all services provided,
  * and you can access service state via the name of the service and associating state property.
  * For example, state.[Service Name].[Service State Property]
  *
- * Actions is an object that will contain your full application action functions, across all services provided,
+ * `actions` is an object that will contain your full application action functions, across all services provided,
  * and you can access actions via the name of the service and associating action.
  * For example, state.[Service Name].[Service Action]
  *
- * Launch is a function that takes the return value from invoking the action creator associated with the service function.
+ * `launch` is a function that takes the return value from invoking the action creator associated with the service function.
  * In turn, this will update state and re-render your React components.
  * For example, launch(actions.[Service Name].[Service Action]())
  *

@@ -5,8 +5,8 @@ import useLaunchReducer from "../hooks/useLaunchReducer";
 import { ServiceApi } from "../types";
 
 /**
- * This component should wrap your application and the Launch.IO createServiceApi should be
- * used in conjunction to populate the serviceApi property of this component.
+ * This component should wrap your application and the `Launch.IO` `createServiceApi` should be
+ * used in conjunction to populate the `serviceApi` property of this component.
  *
  * @return Launch.IO Provider React Component
  * */

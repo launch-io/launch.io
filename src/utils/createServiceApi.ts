@@ -2,7 +2,7 @@ import reducer from "./reducer";
 import history from "../services/history";
 import {
   Service,
-  ServiceOption,
+  ServiceOptions,
   ServiceApi,
   ActionCreators,
   ActionFunctions,
@@ -11,12 +11,12 @@ import {
 /**
  * Takes an array of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component.
  * @param {Array} services An array of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (object of functions) properties.
- * @param {Object} options A Launch.IO options object.
+ * @param {Object} options A `Launch.IO` `ServiceOptions` object.
  * @param {Boolean} options.enableTimeTravel Enabled Launch.IO Time Travel Debugging.
  */
 const createServiceApi = (
   services: Service[],
-  options: ServiceOption = { enableTimeTravel: false }
+  options: ServiceOptions = { enableTimeTravel: false }
 ): ServiceApi => {
   const allServices: Service[] = [
     ...services,

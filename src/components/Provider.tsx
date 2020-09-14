@@ -8,7 +8,7 @@ import { ServiceApi } from "../types";
  * This component should wrap your application and the `Launch.IO` `createServiceApi` should be
  * used in conjunction to populate the `serviceApi` property of this component.
  *
- * @return Launch.IO Provider React Component
+ * @return `Launch.IO` `Provider` `React` Component
  * */
 const Provider: React.FC<{ serviceApi: ServiceApi }> = ({
   serviceApi,

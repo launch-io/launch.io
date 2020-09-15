@@ -5,10 +5,12 @@ import { ActionCreators, ActionFunctions, Action } from "../types";
 import history from "../services/history";
 import { getActionFunction } from "../utils/helpers";
 
-export default (
+const reducer = (
   actionCreators: ActionCreators,
-  actionFunctions: ActionFunctions
-) => (state: any, action: Action): any => {
+  actionFunctions: ActionFunctions,
+  state: any,
+  action: Action
+): any => {
   const actionFunction = getActionFunction(actionFunctions, action);
   let newState = { ...state };
 
@@ -38,7 +40,7 @@ export default (
         launch: action.launch,
       },
       {
-        state,
+        newState,
         action: {
           serviceName: action.serviceName,
           actionName: action.actionName,
@@ -50,4 +52,11 @@ export default (
   }
 
   return state;
+};
+
+export default (
+  actionCreators: ActionCreators,
+  actionFunctions: ActionFunctions
+) => (state: any, action: Action): any => {
+  return reducer(actionCreators, actionFunctions, state, action);
 };

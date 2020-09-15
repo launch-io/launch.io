@@ -1,20 +1,20 @@
 import React from "react";
-import { Provider as LibraryProvider, createServiceApi } from "launch.io";
+import { LaunchProvider, createServiceApi } from "launch.io";
 import Main from "./views/Main";
 import services from "./services";
 import "./App.css";
 
 export default function App() {
   return (
-    <LibraryProvider
+    <LaunchProvider
       serviceApi={createServiceApi(services, { enableTimeTravel: true })}
     >
       <div className="App">
         <header className="App-header">
-          <h2>Launch.IO Example</h2>
+          {/* <img src="/public/logo-small.png"></img> */}
           <Main />
         </header>
       </div>
-    </LibraryProvider>
+    </LaunchProvider>
   );
 }

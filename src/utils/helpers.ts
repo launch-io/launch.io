@@ -9,7 +9,7 @@ import {
   LaunchAction,
 } from "../types";
 
-export const getActionFunction = (
+const getActionFunction = (
   actionFunctions: ActionFunctions,
   action: Action
 ): ActionFunction => {
@@ -17,7 +17,7 @@ export const getActionFunction = (
   return service[action.actionName];
 };
 
-export const getNewState = (
+const getNewState = (
   initialState: any,
   actions: Action[],
   actionFunctions: ActionFunctions,
@@ -42,3 +42,5 @@ export const getNewState = (
 
   return newState;
 };
+
+export { getActionFunction, getNewState };

@@ -73,7 +73,7 @@ const actions = {
     return {
       initialGlobalState: state._history.initialGlobalState
         ? state._history.initialGlobalState
-        : newAction.state,
+        : state,
       past: [...state._history.past, newAction.action],
       future: [],
     };

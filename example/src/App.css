@@ -10,7 +10,11 @@
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 1vmin);
-  color: white;
+  color: black;
+}
+
+.Logo {
+  margin-bottom: 32px;
 }
 
 label {

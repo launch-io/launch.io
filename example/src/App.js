@@ -11,7 +11,7 @@ export default function App() {
     >
       <div className="App">
         <header className="App-header">
-          {/* <img src="/public/logo-small.png"></img> */}
+          <img className="Logo" src="logo-small.png" alt="Launch.IO"></img>
           <Main />
         </header>
       </div>

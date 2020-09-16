@@ -1,6 +1,6 @@
 # ![Launch.IO Logo](./logo/logo-small.png)
 
-Launch.IO is an Ultra Hip, Simple, Smart, and Fast Predictable React State Management Library.
+Launch.IO is an Ultra Hip, Simple, Smart, and Fast, Time Traveling React State Management Library.
 
 It provides a means to easily and consistently split up your application state into different services. Create action functions in those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](https://en.wikipedia.org/wiki/Time_travel_debugging) are included.)
 

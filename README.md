@@ -1,5 +1,6 @@
 # ![Launch.IO Logo](./logo/logo-small.png)
 
+[![Build](https://github.com/jbillmann/launch.io/workflows/Launch.IO%20Build/badge.svg)](https://github.com/jbillmann/launch.io/actions?query=workflow%3A%22Launch.IO+Build%22)
 [![Npm version](https://img.shields.io/npm/v/launch.io.svg)](https://npmjs.org/package/launch.io)
 [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/launch.io)](https://bundlephobia.com/result?p=launch.io)
 [![Npm types](https://img.shields.io/npm/types/launch.io.svg)](https://npmjs.org/package/launch.io)

@@ -1,5 +1,9 @@
 # ![Launch.IO Logo](./logo/logo-small.png)
 
+[![Npm version](https://img.shields.io/npm/v/launch.io.svg)](https://npmjs.org/package/launch.io)
+[![Bundlephobia](https://img.shields.io/bundlephobia/minzip/launch.io)](https://bundlephobia.com/result?p=launch.io)
+[![Npm types](https://img.shields.io/npm/types/launch.io.svg)](https://npmjs.org/package/launch.io)
+
 Launch.IO is an Ultra Hip, Simple, Smart, and Fast, Time Traveling React State Management Library.
 
 It provides a means to easily and consistently split up your application state into different services. Create action functions in those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](https://en.wikipedia.org/wiki/Time_travel_debugging) are included.)

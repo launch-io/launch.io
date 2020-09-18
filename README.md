@@ -41,19 +41,15 @@ const calculatorService = {
 };
 ```
 
-Wrap your React application with the Launch.IO `LaunchProvider` component and pass your `array` of application services into the `createServiceApi`.
+Wrap your React application with the Launch.IO `LaunchProvider` component and pass your `array` of application services along with any `options` you'd like to specify.
 
 ```jsx
 import React from "react";
-import { LaunchProvider, createServiceApi } from "launch.io";
+import { LaunchProvider } from "launch.io";
 
 const App = () => {
   return (
-    <LaunchProvider
-      serviceApi={createServiceApi([calculatorService], {
-        enableTimeTravel: true,
-      })}
-    >
+    <LaunchProvider services={services} options={{ enableTimeTravel: true }}>
       <div className="MyApp">...</div>
     </LaunchProvider>
   );

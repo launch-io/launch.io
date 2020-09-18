@@ -1,19 +1,26 @@
 /* eslint-disable react/prop-types */
-import React from "react";
+import React, { useMemo } from "react";
 import Context from "./Context";
 import useLaunchReducer from "../hooks/useLaunchReducer";
-import { ServiceApi } from "../types";
+import createServiceApi from "../utils/createServiceApi";
+import { Service, ServiceOptions } from "../types";
 
 /**
- * This component should wrap your application and the `Launch.IO` `createServiceApi` should be
- * used in conjunction to populate the `serviceApi` property of this component.
+ * `LaunchProvider` should wrap your `React` application.
  *
+ * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (object of functions) properties.
+ * @param {Object} options A `Launch.IO` `ServiceOptions` object.
  * @return `Launch.IO` `LaunchProvider` `React` Component
  * */
-const LaunchProvider: React.FC<{ serviceApi: ServiceApi }> = ({
-  serviceApi,
-  children,
-}) => {
+const LaunchProvider: React.FC<{
+  services: Service[];
+  options: ServiceOptions;
+  children: any;
+}> = ({ services, options, children }) => {
+  const serviceApi = useMemo(() => {
+    return createServiceApi(services, options);
+  }, [services, options]);
+
   const [state, dispatch] = useLaunchReducer(
     serviceApi.reducer,
     serviceApi.initialState

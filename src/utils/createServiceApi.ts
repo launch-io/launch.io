@@ -4,8 +4,8 @@ import {
   Service,
   ServiceOptions,
   ServiceApi,
-  ActionCreators,
-  ActionFunctions,
+  LaunchActions,
+  ServiceActions,
 } from "../types";
 
 /**
@@ -23,11 +23,11 @@ const createServiceApi = (
     ...(options.enableTimeTravel ? [history] : []),
   ];
   const initialState = {},
-    actionCreators: ActionCreators = {},
-    actionFunctions: ActionFunctions = {};
+    launchActions: LaunchActions = {},
+    serviceActions: ServiceActions = {};
 
   allServices.forEach((service, index) => {
-    const serviceActions = {},
+    const launcActionFunctions = {},
       serviceActionFunctions = {};
 
     if (!service.name) {
@@ -41,11 +41,9 @@ const createServiceApi = (
       );
     }
     if (!service.actions) {
-      throw new Error(
-        `[Launch.IO]: ${service.name} must contain an array of action functions.`
-      );
+      throw new Error(`[Launch.IO]: ${service.name} must contain actions.`);
     }
-    if (actionCreators[service.name]) {
+    if (launchActions[service.name]) {
       throw new Error(
         `[Launch.IO]: Service with a name of ${service.name} already exists.`
       );
@@ -54,7 +52,7 @@ const createServiceApi = (
     initialState[service.name] = service.initialState;
 
     Object.keys(service.actions).forEach((actionKey) => {
-      serviceActions[actionKey] = (payload) => ({
+      launcActionFunctions[actionKey] = (payload) => ({
         serviceName: service.name,
         actionName: actionKey,
         payload,
@@ -62,14 +60,14 @@ const createServiceApi = (
       serviceActionFunctions[actionKey] = service.actions[actionKey];
     });
 
-    actionCreators[service.name] = serviceActions;
-    actionFunctions[service.name] = serviceActionFunctions;
+    launchActions[service.name] = launcActionFunctions;
+    serviceActions[service.name] = serviceActionFunctions;
   });
 
   return {
     initialState,
-    actions: actionCreators,
-    reducer: reducer(actionCreators, actionFunctions),
+    actions: launchActions,
+    reducer: reducer(launchActions, serviceActions),
   };
 };
 

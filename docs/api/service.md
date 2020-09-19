@@ -1,6 +1,6 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) Service
 
-Please note that _service functions_ are those that return new state whereas _action functions_, an abstraction created by Launch.IO, are used in conjunction with the `launch` function to subsequently dispatch _service functions_.
+Please note that _service actions_ are those functions that return new state whereas _launch actions_, an abstraction created by Launch.IO, are used in conjunction with the `launch` function to subsequently dispatch _service actions_.
 
 ---
 

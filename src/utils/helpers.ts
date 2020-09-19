@@ -3,37 +3,37 @@
 
 import {
   Action,
-  ActionCreator,
-  ActionFunction,
-  ActionFunctions,
   LaunchAction,
+  ServiceAction,
+  ServiceActions,
+  Launcher,
 } from "../types";
 
-const getActionFunction = (
-  actionFunctions: ActionFunctions,
+const getServiceAction = (
+  serviceActions: ServiceActions,
   action: Action
-): ActionFunction => {
-  const service = actionFunctions[action.serviceName];
+): ServiceAction => {
+  const service = serviceActions[action.serviceName];
   return service[action.actionName];
 };
 
 const getNewState = (
   initialState: any,
   actions: Action[],
-  actionFunctions: ActionFunctions,
-  actionCreator: {
-    [actionName: string]: ActionCreator;
+  serviceActions: ServiceActions,
+  launchAction: {
+    [actionName: string]: LaunchAction;
   },
-  launch: LaunchAction
+  launch: Launcher
 ): any => {
   const newState = { ...initialState };
 
   actions.forEach((action) => {
-    const actionFunction = getActionFunction(actionFunctions, action);
-    newState[action.serviceName] = actionFunction(
+    const serviceAction = getServiceAction(serviceActions, action);
+    newState[action.serviceName] = serviceAction(
       {
         state: newState[action.serviceName],
-        actions: actionCreator,
+        actions: launchAction,
         launch,
       },
       action.payload
@@ -43,4 +43,4 @@ const getNewState = (
   return newState;
 };
 
-export { getActionFunction, getNewState };
+export { getServiceAction, getNewState };

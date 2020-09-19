@@ -1,31 +1,31 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ActionCreators, ActionFunctions, Action } from "../types";
+import { LaunchActions, ServiceActions, Action } from "../types";
 import history from "../services/history";
-import { getActionFunction } from "../utils/helpers";
+import { getServiceAction } from "../utils/helpers";
 
 const reducer = (
-  actionCreators: ActionCreators,
-  actionFunctions: ActionFunctions,
+  launchActions: LaunchActions,
+  serviceActions: ServiceActions,
   state: any,
   action: Action
 ): any => {
-  const actionFunction = getActionFunction(actionFunctions, action);
+  const serviceAction = getServiceAction(serviceActions, action);
   let newState = { ...state };
 
   if (action.serviceName === history.name) {
-    newState = actionFunction(
-      { state, actions: actionCreators[history.name], launch: action.launch },
-      actionFunctions
+    newState = serviceAction(
+      { state, actions: launchActions[history.name], launch: action.launch },
+      serviceActions
     );
     return newState;
   }
 
-  const updatedState = actionFunction(
+  const updatedState = serviceAction(
     {
       state: state[action.serviceName],
-      actions: actionCreators[action.serviceName],
+      actions: launchActions[action.serviceName],
       launch: action.launch,
     },
     action.payload
@@ -36,7 +36,7 @@ const reducer = (
     newState._history = history.actions.add(
       {
         state,
-        actions: actionCreators[history.name],
+        actions: launchActions[history.name],
         launch: action.launch,
       },
       {
@@ -55,8 +55,8 @@ const reducer = (
 };
 
 export default (
-  actionCreators: ActionCreators,
-  actionFunctions: ActionFunctions
+  launchActions: LaunchActions,
+  serviceActions: ServiceActions
 ) => (state: any, action: Action): any => {
-  return reducer(actionCreators, actionFunctions, state, action);
+  return reducer(launchActions, serviceActions, state, action);
 };

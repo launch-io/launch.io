@@ -7,7 +7,7 @@
 
 Launch.IO is an Ultra Hip, Simple, Smart, and Fast, Time Traveling React State Management Library.
 
-It provides a means to easily and consistently split up your application state into different services. Create action functions in those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](https://en.wikipedia.org/wiki/Time_travel_debugging) are included.)
+It provides a means to easily and consistently split up your application state into different services. Create actions within those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](https://en.wikipedia.org/wiki/Time_travel_debugging) are included.)
 
 You probably don't need all of the overhead and features of the other state management libraries. You just need Launch.IO and some good ice cream.
 
@@ -96,7 +96,7 @@ const CalculatorForm = () => {
 
 Launch.IO is an abstraction around React's [`useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext) and [`useReducer`](https://reactjs.org/docs/hooks-reference.html#usereducer) with a healthy dose of time travel debugging. That's it! But, it's oh so cool, because you can launch things.
 
-Because it relies on pure functions, it has the predictable state management of [Redux](https://github.com/reduxjs/redux), except there is no boilerplate and it's not Redux.
+It relies on pure functions so it has the predictable state management of [Redux](https://github.com/reduxjs/redux), except there is no boilerplate and it's not Redux.
 
 ## Documentation
 

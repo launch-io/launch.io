@@ -12,7 +12,7 @@ Time Travel debugging is enabled by setting `enableTimeTravel` to `true` for the
 
 ### Access
 
-Time Travel action functions are accessed via `actions._history` and, just like service actions, are dispatched via the `launch` function. All of these are accessed via the [`useLaunch`](./useLaunch.md) hook.
+Time Travel launch actions are accessed via `actions._history` and are dispatched via the `launch` function. All of these are accessed via the [`useLaunch`](./useLaunch.md) hook.
 
 ### Example
 

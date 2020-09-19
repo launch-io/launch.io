@@ -15,11 +15,26 @@
 ```jsx
 import React from "react";
 import { LaunchProvider } from "launch.io";
-import services from "./services";
+
+const calculatorService = {
+  name: "calculator",
+
+  initialState: {
+    value: 0,
+  },
+
+  actions: {
+    increase: ({ state }) => ({ value: state.value + 1 }),
+    decrease: ({ state }) => ({ value: state.value - 1 }),
+  },
+};
 
 const App = () => {
   return (
-    <LaunchProvider services={services} options={{ enableTimeTravel: true }}>
+    <LaunchProvider
+      services={[calculatorService]}
+      options={{ enableTimeTravel: true }}
+    >
       <div className="MyApp">...</div>
     </LaunchProvider>
   );

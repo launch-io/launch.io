@@ -9,17 +9,17 @@ export interface ServiceOptions {
 }
 
 /**
- * The object returned from an `ActionCreator` is used to determine which `ActionFunction` to call.
+ * The object returned from an `LaunchAction` is used to determine which `ServiceAction` to call.
  */
 export interface Action {
   /** Name of service with the action that was launched. */
   serviceName: string;
   /** Name of the service action being launched. */
   actionName: string;
-  /** Object containing values required for the service action function to process. */
+  /** Object containing values required for the service action function to consume. */
   payload?: any;
-  /** Function to launch other service actions. */
-  launch?: LaunchAction;
+  /** Function to launch actions. */
+  launch?: Launcher;
 }
 
 /**
@@ -30,10 +30,10 @@ export interface ServiceApi {
   initialState: {
     [serviceName: string]: any;
   };
-  /** Combined functions of all sevices. */
+  /** Combined `LaunchActions` of all sevices. */
   actions: {
     [serviceName: string]: {
-      [actionName: string]: ActionCreator;
+      [actionName: string]: LaunchAction;
     };
   };
   /** Pure function used to return new state. */
@@ -41,17 +41,17 @@ export interface ServiceApi {
 }
 
 /**
- * The first parameter received in a service action function (`ActionFunction`).
+ * The first parameter received in a `ServiceAction` function.
  */
-export interface ActionFunctionContext {
+export interface ServiceActionContext {
   /** The current state of the service for which a function was launched. */
   state: any;
-  /** Object containing functions, for the service, that can be launched. */
+  /** Object containing launch actions for the service. */
   actions: {
-    [actionName: string]: ActionCreator;
+    [actionName: string]: LaunchAction;
   };
-  /** Function to launch service actions. */
-  launch: LaunchAction;
+  /** Function to launch actions. */
+  launch: Launcher;
 }
 
 /**
@@ -64,7 +64,7 @@ export interface Service {
   initialState: any;
   /** Functions that are used to change state within the service. */
   actions: {
-    [actionName: string]: ActionFunction;
+    [actionName: string]: ServiceAction;
   };
 }
 
@@ -74,53 +74,51 @@ export interface Service {
 export interface LaunchContext {
   /** Current state of the Launch.IO application. */
   state: any;
-  /** Object containing access to all services and action functions for each service. */
+  /** Object containing access to all launch actions for each service. */
   actions: {
     [serviceName: string]: {
-      [actionName: string]: ActionCreator;
+      [actionName: string]: LaunchAction;
     };
   };
-  /** Function to launch service actions. */
-  launch: LaunchAction;
+  /** Function to launch actions. */
+  launch: Launcher;
 }
 
 /**
- * Object containing all service action functions.
- * Action Function is a function declared within `actions` for each service.
+ * Object containing all service actions.
  */
-export interface ActionFunctions {
+export interface ServiceActions {
   [serviceName: string]: {
-    [actionName: string]: ActionFunction;
+    [actionName: string]: ServiceAction;
   };
 }
 
 /**
- * Object containing all service action creators.
- * Action Creator is an abstraction created for each service action function by `Launch.IO`.
+ * Object containing all launch actions.
  */
-export interface ActionCreators {
+export interface LaunchActions {
   [serviceName: string]: {
-    [actionName: string]: ActionCreator;
+    [actionName: string]: LaunchAction;
   };
 }
 
 /**
- * An function abstraction created for each service action function (`ActionFunction`) by `Launch.IO`.
+ * An function abstraction created for each service action by `Launch.IO`.
  */
-export type ActionCreator = (payload?: any) => Action;
+export type LaunchAction = (payload?: any) => Action;
 
 /**
- * A function declared within `actions` for each service.
+ * A function declared within actions for each service.
  */
-export type ActionFunction = (
-  context: ActionFunctionContext,
+export type ServiceAction = (
+  context: ServiceActionContext,
   payload?: any
 ) => any;
 
 /**
  * `Launch.IO` function to launch other service actions.
  */
-export type LaunchAction = (ActionCreator: any) => void;
+export type Launcher = (LaunchAction: any) => void;
 
 /**
  * Return value for the `Launch.IO` custom reducer.

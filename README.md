@@ -5,13 +5,13 @@
 [![Bundlephobia](https://img.shields.io/bundlephobia/minzip/launch.io)](https://bundlephobia.com/result?p=launch.io)
 [![Npm types](https://img.shields.io/npm/types/launch.io.svg)](https://npmjs.org/package/launch.io)
 
-Launch.IO is an Ultra Hip, Simple, Smart, and Fast, Time Traveling React State Management Library.
+Launch.IO is an Ultra Hip, Simple, and Fast, Time Traveling React State Management Library.
 
 It provides a means to easily and consistently split up your application state into different services. Create actions within those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](https://en.wikipedia.org/wiki/Time_travel_debugging) are included.)
 
 You probably don't need all of the overhead and features of the other state management libraries. You just need Launch.IO and some good ice cream.
 
-Simple. Smart. Fast.
+Simple. Fast. Tiny.
 
 Everything you need. (Except for the ice cream.)
 
@@ -115,7 +115,7 @@ Check out the official stats.
 | Category        | Rating         |
 | --------------- | -------------- |
 | Complexity      | `Ultra Simple` |
-| Awareness       | `Ultra Smart`  |
+| Size            | `Ultra Tiny`   |
 | Performance     | `Ultra Fast`   |
 | Overall Ranking | `Ultra Hip`    |
 

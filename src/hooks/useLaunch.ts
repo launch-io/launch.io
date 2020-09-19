@@ -5,12 +5,12 @@ import { LaunchContext } from "../types";
 /**
  * Returns a `Launch.IO` object containing current `state`, `actions`, and the `launch` function.
  *
- * `state` is an object that will contain your full application state, across all services provided,
- * and you can access service state via the name of the service along with the associating state property.
+ * `state` is an object that will contain the full application state, across all services provided,
+ * and service state can be accessed via the name of the service along with the associating state property.
  * For example, `state.[Service Name].[Service State Property]`
  *
- * `actions` is an object that will contain your full application actions, across all services provided,
- * and you can access actions via the name of the service along with the associating action.
+ * `actions` is an object that will contain the full application actions, across all services provided,
+ * and service acctions can be accessed via the name of the service along with the associating action.
  * For example, `actions.[Service Name].[Service Action]`
  *
  * `launch` is a function that takes the return value from invoking the action creator associated with the service action.

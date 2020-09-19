@@ -6,13 +6,13 @@ const initialState = {
 
 const actions = {
   updateName: ({ state }, payload) => ({ ...state, ...payload }),
-  fetchName: ({ actions, launch }) => {
+  fetchName: async ({ actions, launch }) => {
     launch(actions.requestName());
-    fetch(`https://swapi.dev/api/people/1`)
-      .then((response) => response.json())
-      .then((data) => {
-        launch(actions.receiveName({ name: data.name }));
-      });
+
+    const response = await fetch(`https://swapi.dev/api/people/1`);
+    const data = await response.json();
+
+    launch(actions.receiveName({ name: data.name }));
   },
   requestName: ({ state }) => ({ ...state, isLoading: true }),
   receiveName: ({ state }, payload) => {

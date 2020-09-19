@@ -49,7 +49,10 @@ import { LaunchProvider } from "launch.io";
 
 const App = () => {
   return (
-    <LaunchProvider services={services} options={{ enableTimeTravel: true }}>
+    <LaunchProvider
+      services={[calculatorService]}
+      options={{ enableTimeTravel: true }}
+    >
       <div className="MyApp">...</div>
     </LaunchProvider>
   );
@@ -99,7 +102,9 @@ Because it relies on pure functions, it has the predictable state management of 
 
 What do you mean?! You pretty much know the library by now. Get at it!
 
-That said, you're probably wondering about time travel debugging. It's in Launch.IO (hint: `state._history` or `actions._history`), but I'll publish the official docs fairly soon.
+That said, you're probably wondering about time travel debugging.
+
+[API Documentation](./docs/api/index.md)
 
 ## Stats
 

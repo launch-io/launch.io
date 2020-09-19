@@ -80,7 +80,7 @@ const CalculatorForm = () => {
 
   return (
     <div>
-      <p>Value: {state.value}</p>
+      <p>Value: {state.calculator.value}</p>
       <button type="button" onClick={handleIncrease}>
         Increase
       </button>

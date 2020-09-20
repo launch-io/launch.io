@@ -4,23 +4,25 @@ Please note that _service actions_ are those functions that return new state whe
 
 ---
 
-Each service object must contain `name` (_String_), `initialState` (_Object_), and `actions` (_Object_ of _Functions_) properties.
+Each service object must contain `name` (`string`), `initialState` (`object`), and `actions` (`object`) properties.
 
 ### Properties
 
-`name`: The name of the service and it also defines how to access `state` for this service from the [`useLaunch`](./useLaunch.md) hook.
+`name` is a `string` that is the name of the service and it also defines how to access `state` for this service from the [`useLaunch`](./useLaunch.md) hook.
 
-`initialState`: Represents the entire state for the service.
+`initialState` is an `object` that initializes the state for the service.
 
-`actions`: Each function represents a service action that can be called to change the state for the service. A service function receives `context` and `payload` arguments and it must return a new service state object.
+`actions` is an `object` of service actions `functions` that can be called to change the state for the service. A service function receives `context` and `payload` arguments and it must return a new service state object.
 
-The `context` (_Object_) argument consists of `state`, `actions`, and `launch` properties. These are the same types that are returned from the [`useLaunch`](./useLaunch.md) hook **except** that they are scoped to the local service. The `launch` function can be used to dispatch other service actions with the service function. An example of this can be found in the [`async example`](./asyncExample.md).
+The `context` argument is an `object` that consists of `state`, `actions`, and `launch` properties. These are the same types that are returned from the [`useLaunch`](./useLaunch.md) hook **except** that they are scoped to the local service. The `launch` function can be used to dispatch other service actions with the service function. An example of this can be found in the [`async example`](./asyncExample.md).
 
-The `payload` (_Object_) argument is passed to the service action via the `launch` function also found in the [`useLauch`](./useLaunch.md) hook properties.
+The `payload` argument is an `object` that is passed to the service action via the `launch` function that is also found in the [`useLauch`](./useLaunch.md) hook properties.
 
 ### Tips
 
 It is recommended that your service functions do not mutate state. Instead they should return a brand new state object.
+
+Service actions are able to launch actions and an example of this can be found in the [async example](./asyncExample.md).
 
 ### Example
 

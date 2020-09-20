@@ -4,11 +4,11 @@ Returns a `Launch.IO` object containing current `state`, `actions`, and the `lau
 
 ### Returns
 
-`state` (_Object_): Contains the current application state across all services provided. You can access service state via the name of the service along with the associating state property. For example, `state.[Service Name].[Service State Property]`.
+`state` is an `object` that contains the current application state across all services provided. You can access service state via the name of the service along with the associating state property. For example, `state.[ServiceName].[ServiceStateProperty]`.
 
-`actions` (_Object_): Contains the application launch actions across all services provided. You can access launch actions via the name of the service along with the associating action. For example, `actions.[Service Name].[Launch Action]`. These actions may take a `payload` (_Object_).
+`actions` is an `object` that contains the application launch actions across all services provided. You can access launch actions via the name of the service along with the associating action. For example, `actions.[ServiceName].[LaunchAction]`. These actions may take a `payload` `object`.
 
-`launch` (_Function_): Takes the return value from invoking a launch action associated with the service action. In turn, the service function will fire and this will update state and re-render your React components. For example, `launch(actions.[Service Name].[Launch Action](payload))`
+`launch` is a `function` that takes the return value from invoking a launch action associated with the service action. In turn, the service function will fire and this will update state and re-render your React components. For example, `launch(actions.[ServiceName].[LaunchAction](payload))`
 
 ### Example
 

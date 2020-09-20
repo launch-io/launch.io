@@ -1,21 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import {
-  Action,
-  LaunchAction,
-  ServiceAction,
-  ServiceActions,
-  Launcher,
-} from "../types";
-
-const getServiceAction = (
-  serviceActions: ServiceActions,
-  action: Action
-): ServiceAction => {
-  const service = serviceActions[action.serviceName];
-  return service[action.actionName];
-};
+import { Action, LaunchAction, ServiceActions, Launcher } from "../types";
 
 const getNewState = (
   initialState: any,
@@ -29,7 +15,7 @@ const getNewState = (
   const newState = { ...initialState };
 
   actions.forEach((action) => {
-    const serviceAction = getServiceAction(serviceActions, action);
+    const serviceAction = serviceActions[action.serviceName][action.actionName];
     newState[action.serviceName] = serviceAction(
       {
         state: newState[action.serviceName],
@@ -43,4 +29,4 @@ const getNewState = (
   return newState;
 };
 
-export { getServiceAction, getNewState };
+export { getNewState };

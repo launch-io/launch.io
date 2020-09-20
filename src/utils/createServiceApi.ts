@@ -19,15 +19,15 @@ const createServiceApi = (
   options: ServiceOptions = { enableTimeTravel: false }
 ): ServiceApi => {
   const allServices: Service[] = [
-    ...services,
-    ...(options.enableTimeTravel ? [history] : []),
-  ];
-  const initialState = {},
+      ...services,
+      ...(options.enableTimeTravel ? [history] : []),
+    ],
+    initialState = {},
     launchActions: LaunchActions = {},
     serviceActions: ServiceActions = {};
 
   allServices.forEach((service, index) => {
-    const launcActionFunctions = {},
+    const launchActionFunctions = {},
       serviceActionFunctions = {};
 
     if (!service.name) {
@@ -52,7 +52,7 @@ const createServiceApi = (
     initialState[service.name] = service.initialState;
 
     Object.keys(service.actions).forEach((actionKey) => {
-      launcActionFunctions[actionKey] = (payload) => ({
+      launchActionFunctions[actionKey] = (payload) => ({
         serviceName: service.name,
         actionName: actionKey,
         payload,
@@ -60,7 +60,7 @@ const createServiceApi = (
       serviceActionFunctions[actionKey] = service.actions[actionKey];
     });
 
-    launchActions[service.name] = launcActionFunctions;
+    launchActions[service.name] = launchActionFunctions;
     serviceActions[service.name] = serviceActionFunctions;
   });
 

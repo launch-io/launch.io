@@ -102,7 +102,7 @@ It relies on pure functions so it has the predictable state management of [Redux
 
 What do you mean?! You pretty much know the library by now. Get at it!
 
-That said, you're probably wondering about time travel debugging.
+Anyway, you're probably wondering about time travel debugging, so here ya go:
 
 [API Documentation](./docs/api/index.md)
 

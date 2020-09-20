@@ -118,7 +118,7 @@ export type ServiceAction = (
 /**
  * `Launch.IO` function to launch other service actions.
  */
-export type Launcher = (LaunchAction: any) => void;
+export type Launcher = (action: Action) => void;
 
 /**
  * Return value for the `Launch.IO` custom reducer.

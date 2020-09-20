@@ -3,7 +3,6 @@
 
 import { LaunchActions, ServiceActions, Action } from "../types";
 import history from "../services/history";
-import { getServiceAction } from "../utils/helpers";
 
 const reducer = (
   launchActions: LaunchActions,
@@ -11,7 +10,7 @@ const reducer = (
   state: any,
   action: Action
 ): any => {
-  const serviceAction = getServiceAction(serviceActions, action);
+  const serviceAction = serviceActions[action.serviceName][action.actionName];
   let newState = { ...state };
 
   if (action.serviceName === history.name) {

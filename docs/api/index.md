@@ -8,6 +8,8 @@ It relies on pure functions so it has the predictable state management of [Redux
 
 So, grab yourself a bowl of ice cream, sit back, and enjoy the Launch.IO API. You'll likely finish these API documents before your bowl of ice cream.
 
+Review the [Terminology](./terminology.md) before diving in.
+
 ### Exports
 
 - [`LaunchProvider`](./launchProvider.md)

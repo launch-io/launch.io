@@ -2,13 +2,19 @@
 
 Returns a `Launch.IO` object containing current `state`, `actions`, and the `launch` function. [LaunchProvider](./launchProvider.md) creates an abstraction for `state` and `actions` from the `array` of [Services](./service.md) that were provided.
 
-### Returns
+### Returns **object**
 
-`state` is an `object` that contains the current application state across all services provided. You can access service state via the name of the service along with the associating state property. For example, `state.[ServiceName].[ServiceStateProperty]`.
+`state` **object**
 
-`actions` is an `object` that contains the application launch actions across all services provided. You can access launch actions via the name of the service along with the associating action. For example, `actions.[ServiceName].[LaunchAction]`. These actions may take a `payload` `object`.
+Contains the current application state across all services provided. You can access service state via the name of the service along with the associating state property. For example, `state.[ServiceName].[ServiceStateProperty]`.
 
-`launch` is a `function` that takes the return value from invoking a launch action associated with the service action. In turn, the service function will fire and this will update state and re-render your React components. For example, `launch(actions.[ServiceName].[LaunchAction](payload))`
+`actions` **object**
+
+Contains the application launch actions across all services provided. You can access launch actions via the name of the service along with the associating action. For example, `actions.[ServiceName].[LaunchAction]`. These actions may take a `payload` `object`.
+
+`launch` **function**
+
+Takes the return value from invoking a launch action associated with the service action. In turn, the service function will fire and this will update state and re-render your React components. For example, `launch(actions.[ServiceName].[LaunchAction](payload))`
 
 ### Example
 

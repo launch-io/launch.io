@@ -7,9 +7,9 @@
 
 Launch.IO is an Ultra Hip, Simple, and Fast, Time Traveling React State Management Library.
 
-It provides a means to easily and consistently split up your application state into different services. Create actions within those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](https://en.wikipedia.org/wiki/Time_travel_debugging) are included.)
+It provides the means to easily and consistently split up your application state into different services. Create actions within those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](./docs/api/timeTravelDebugging.md) are included.)
 
-You probably don't need all of the overhead and features of the other state management libraries. You just need Launch.IO and some good ice cream.
+You probably don't need all the overhead and alll of the features of the other state management libraries. You just need Launch.IO and some good ice cream.
 
 Simple. Fast. Tiny.
 
@@ -23,7 +23,7 @@ npm install launch.io
 
 ## Getting Started
 
-Create your application services. Each service should have a `name`, `initialState`, and a set of `actions`.
+Create your application services (as many as you'd like!). Each service should have a `name`, `initialState`, and a set of `actions`.
 
 ```javascript
 const calculatorService = {
@@ -94,15 +94,13 @@ const CalculatorForm = () => {
 
 ## Tell Me More
 
-Launch.IO is an abstraction around React's [`useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext) and [`useReducer`](https://reactjs.org/docs/hooks-reference.html#usereducer) with a healthy dose of time travel debugging. That's it! But, it's oh so cool, because you can launch things.
+Launch.IO is an abstraction around React's [`useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext) and [`useReducer`](https://reactjs.org/docs/hooks-reference.html#usereducer) with a healthy dose of time travel debugging.
 
 It relies on pure functions so it has the predictable state management of [Redux](https://github.com/reduxjs/redux), except there is no boilerplate and it's not Redux.
 
 ## Documentation
 
 What do you mean?! You pretty much know the library by now. Get at it!
-
-Anyway, you're probably wondering about time travel debugging, so here ya go:
 
 [API Documentation](./docs/api/index.md)
 

@@ -10,7 +10,7 @@ import {
 
 /**
  * Takes an `array` of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component.
- * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (object of functions) properties.
+ * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (`object` of `functions`) properties.
  * @param {Object} options A `Launch.IO` `ServiceOptions` object.
  * @param {Boolean} options.enableTimeTravel Enable Launch.IO Time Travel Debugging.
  */

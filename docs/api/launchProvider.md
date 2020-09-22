@@ -4,11 +4,15 @@
 
 ### Props
 
-`services` is an `array` of your application [Services](./service.md). Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (`object`) properties.
+`services` **array**
 
-`options` is an `object` that contains configuration properties:
+The array of application [Services](./service.md). Each service object will consist of `name` (**string**), `initialState` (**object**), and `actions` (**object**) properties.
 
-- `enableTimeTravel` is a `boolean` indicates whether or not time travel debugging is enabled. This has a default value of `false` and it should not be enabled in non-development environments.
+`options` **object**
+
+Contains the Launch.IO configuration properties:
+
+- `enableTimeTravel` (**boolean**) indicates whether or not time travel debugging is enabled. This has a default value of `false` and it should not be enabled in non-development environments.
 
 ### Example
 

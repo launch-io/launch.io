@@ -1,18 +1,24 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) Service
 
-Please note that _service actions_ are those functions that return new state whereas _launch actions_, an abstraction created by Launch.IO, are used in conjunction with the `launch` function to subsequently dispatch _service actions_.
+Please be sure to have reviewd [terminology](./terminology.md) before reviewing services.
 
 ---
 
-Each service object must contain `name` (`string`), `initialState` (`object`), and `actions` (`object`) properties.
+Each service object must contain `name` (**string**), `initialState` (**object**), and `actions` (**object**) properties.
 
 ### Properties
 
-`name` is a `string` that is the name of the service and it also defines how to access `state` for this service from the [`useLaunch`](./useLaunch.md) hook.
+`name` **string**
 
-`initialState` is an `object` that initializes the state for the service.
+The name of the service and it also defines how to access `state` for this service from the [`useLaunch`](./useLaunch.md) hook.
 
-`actions` is an `object` of service actions `functions` that can be called to change the state for the service. A service function receives `context` and `payload` arguments and it must return a new service state object.
+`initialState` **object**
+
+The beginning state for the service.
+
+`actions` **object**
+
+Service actions `functions` that can be called to change the state for the service. A service function receives `context` and `payload` arguments and it must return a new service state object.
 
 The `context` argument is an `object` that consists of `state`, `actions`, and `launch` properties. These are the same types that are returned from the [`useLaunch`](./useLaunch.md) hook **except** that they are scoped to the local service. The `launch` function can be used to dispatch other service actions with the service function. An example of this can be found in the [`async example`](./asyncExample.md).
 

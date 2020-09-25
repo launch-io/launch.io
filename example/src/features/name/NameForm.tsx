@@ -1,36 +1,34 @@
 import React from "react";
-import PropTypes from "prop-types";
+import { useName } from "./name.hooks";
 
-const NameForm = (props) => {
+const NameForm = () => {
+  const { firstName, lastName, updateName } = useName();
   return (
     <div>
       <form>
         <div>
           <label>First Name</label>
           <input
-            value={props.name.firstName}
+            value={firstName}
             onChange={(e) => {
-              props.nameChange(e, "firstName");
+              updateName({ firstName: e.target.value });
             }}
           />
+          <h3>{firstName}</h3>
         </div>
         <div>
           <label>Last Name</label>
           <input
-            value={props.name.lastName}
+            value={lastName}
             onChange={(e) => {
-              props.nameChange(e, "lastName");
+              updateName({ lastName: e.target.value });
             }}
           />
+          <h3>{lastName}</h3>
         </div>
       </form>
     </div>
   );
-};
-
-NameForm.propTypes = {
-  name: PropTypes.object.isRequired,
-  nameChange: PropTypes.func.isRequired,
 };
 
 export default NameForm;

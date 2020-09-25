@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import Context from "../components/Context";
 import { LaunchContext } from "../types";
 
@@ -21,10 +21,24 @@ import { LaunchContext } from "../types";
  */
 const useLaunch = (): LaunchContext => {
   const context = useContext(Context);
+  const actions = useMemo(() => {
+    return Object.keys(context.actions).reduce((boundActions, serviceName) => {
+      boundActions[serviceName] = Object.keys(
+        context.actions[serviceName]
+      ).reduce((serviceActions, serviceActionName) => {
+        serviceActions[serviceActionName] = (...args) =>
+          context.dispatch(
+            context.actions[serviceName][serviceActionName](...args)
+          );
+        return serviceActions;
+      }, {});
 
+      return boundActions;
+    }, {});
+  }, [context.actions, context.dispatch]);
   return {
     state: context.state,
-    actions: context.actions,
+    actions,
     launch: context.dispatch,
   };
 };

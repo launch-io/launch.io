@@ -1,4 +1,8 @@
-const initialState = {
+export interface CalculatorState {
+  value: number;
+}
+
+const initialState: CalculatorState = {
   value: 0,
 };
 

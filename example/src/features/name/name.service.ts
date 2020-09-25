@@ -1,4 +1,9 @@
-const initialState = {
+export interface NameState {
+  firstName: string;
+  lastName: string;
+  isLoading: boolean;
+}
+const initialState: NameState = {
   firstName: "",
   lastName: "",
   isLoading: false,

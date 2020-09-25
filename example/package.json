@@ -1,14 +1,13 @@
 {
-  "name": "launch.io-example",
-  "description": "A sample application using the Launch.IO state management library for React",
+  "name": "launch.io-typescript",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "launch.io": "^0.9.0",
-    "prop-types": "^15.7.2",
+    "launch.io": "file:..",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-scripts": "3.4.1"
+    "react-scripts": "3.4.1",
+    "typescript": "~3.7.2"
   },
   "scripts": {
     "start": "react-scripts start",

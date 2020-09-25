@@ -1,6 +1,6 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) `useLaunch()`
 
-Returns a `Launch.IO` object containing current `state`, `actions`, and the `launch` function. [LaunchProvider](./launchProvider.md) creates an abstraction for `state` and `actions` from the `array` of [Services](./service.md) that were provided.
+Returns a `Launch.IO` object containing current `state` and launch `actions`. [LaunchProvider](./launchProvider.md) creates an abstraction for `state` and `actions` from the `array` of [Services](./service.md) that were provided.
 
 ### Returns **object**
 
@@ -12,10 +12,6 @@ Contains the current application state across all services provided. You can acc
 
 Contains the application launch actions across all services provided. You can access launch actions via the name of the service along with the associating action. For example, `actions.[ServiceName].[LaunchAction]`. These actions may take a `payload` `object`.
 
-`launch` **function**
-
-Takes the return value from invoking a launch action associated with the service action. In turn, the service function will fire and this will update state and re-render your React components. For example, `launch(actions.[ServiceName].[LaunchAction](payload))`
-
 ### Example
 
 ```javascript
@@ -24,14 +20,14 @@ import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
   const stepValue = 2;
-  const { state, actions, launch } = useLaunch();
+  const { state, actions } = useLaunch();
 
   const handleIncrease = () => {
-    launch(actions.calculator.increase(stepValue));
+    actions.calculator.increase(stepValue);
   };
 
   const handleDecrease = () => {
-    launch(actions.calculator.decrease(stepValue));
+    actions.calculator.decrease(stepValue);
   };
 
   return (

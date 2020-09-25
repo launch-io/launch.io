@@ -61,21 +61,21 @@ const App = () => {
 export default App;
 ```
 
-Use the Launch.IO `useLaunch` hook to access your services state and actions. Launch actions, using the `launch` function, within your React components.
+Use the Launch.IO `useLaunch` hook to access your services state and launch actions.
 
 ```jsx
 import React from "react";
 import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
-  const { state, actions, launch } = useLaunch();
+  const { state, actions } = useLaunch();
 
   const handleIncrease = () => {
-    launch(actions.calculator.increase());
+    actions.calculator.increase();
   };
 
   const handleDecrease = () => {
-    launch(actions.calculator.decrease());
+    actions.calculator.decrease();
   };
 
   return (

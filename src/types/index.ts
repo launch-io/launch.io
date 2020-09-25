@@ -80,8 +80,6 @@ export interface LaunchContext {
       [actionName: string]: LaunchAction;
     };
   };
-  /** Function to launch actions. */
-  launch: Launcher;
 }
 
 /**

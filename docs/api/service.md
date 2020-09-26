@@ -20,9 +20,9 @@ The beginning state for the service.
 
 Service actions `functions` that can be called to change the state for the service. A service function receives `context` and `payload` arguments and it must return a new service state object.
 
-The `context` argument is an `object` that consists of `state`, `actions`, and `launch` properties. These are the same types that are returned from the [`useLaunch`](./useLaunch.md) hook **except** that they are scoped to the local service. The `launch` function can be used to dispatch other service actions with the service function. An example of this can be found in the [`async example`](./asyncExample.md).
+The `context` argument is an `object` that consists of `state`, and `actions` properties. These are the same types that are returned from the [`useLaunch`](./useLaunch.md) hook **except** that they are scoped to the local service. Service actions can be dispatch other launch actions. An example of this can be found in the [`async example`](./asyncExample.md).
 
-The `payload` argument is an `object` that is passed to the service action via the `launch` function that is also found in the [`useLauch`](./useLaunch.md) hook properties.
+The `payload` argument is an `object` that is passed into the launch action.
 
 ### Tips
 
@@ -41,11 +41,11 @@ const calculatorService = {
   },
 
   actions: {
-    increase: ({ state, actions, launch }, payload) => ({
+    increase: ({ state, actions }, payload) => ({
       value: state.value + payload,
     }),
 
-    decrease: ({ state, actions, launch }, payload) => ({
+    decrease: ({ state, actions }, payload) => ({
       value: state.value - payload,
     }),
   },

@@ -12,7 +12,7 @@ Time Travel debugging is enabled by setting `enableTimeTravel` to `true` for the
 
 ### Access
 
-Time Travel launch actions are accessed via `actions._history` and dispatched via the `launch` function. All of these are accessed via the [`useLaunch`](./useLaunch.md) hook.
+Time Travel launch actions are accessed via `actions._history`. All of these are accessed via the [`useLaunch`](./useLaunch.md) hook.
 
 ### Example
 
@@ -21,14 +21,14 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const TimeTravel = (props) => {
-  const { actions, launch } = useLaunch();
+  const { actions } = useLaunch();
 
   const rewind = () => {
-    launch(actions._history.stepBack());
+    actions._history.stepBack();
   };
 
   const fastForward = () => {
-    launch(actions._history.stepForward());
+    actions._history.stepForward();
   };
 
   return (

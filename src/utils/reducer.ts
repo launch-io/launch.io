@@ -4,6 +4,13 @@
 import { LaunchActions, ServiceActions, Action } from "../types";
 import history from "../services/history";
 
+const getBoundLaunchActions = (launch, launchActions) =>
+  Object.keys(launchActions).reduce((boundLaunchActions, launchActionName) => {
+    boundLaunchActions[launchActionName] = (...args) =>
+      launch(launchActions[launchActionName](...args));
+    return boundLaunchActions;
+  }, {});
+
 const reducer = (
   launchActions: LaunchActions,
   serviceActions: ServiceActions,
@@ -15,7 +22,13 @@ const reducer = (
 
   if (action.serviceName === history.name) {
     newState = serviceAction(
-      { state, actions: launchActions[history.name], launch: action.launch },
+      {
+        state,
+        actions: getBoundLaunchActions(
+          action.launch,
+          launchActions[history.name]
+        ),
+      },
       serviceActions
     );
     return newState;
@@ -24,8 +37,10 @@ const reducer = (
   const updatedState = serviceAction(
     {
       state: state[action.serviceName],
-      actions: launchActions[action.serviceName],
-      launch: action.launch,
+      actions: getBoundLaunchActions(
+        action.launch,
+        launchActions[action.serviceName]
+      ),
     },
     action.payload
   );
@@ -35,8 +50,10 @@ const reducer = (
     newState._history = history.actions.add(
       {
         state,
-        actions: launchActions[history.name],
-        launch: action.launch,
+        actions: getBoundLaunchActions(
+          action.launch,
+          launchActions[history.name]
+        ),
       },
       {
         newState,

@@ -28,13 +28,13 @@ const actions = {
     };
   },
 
-  fetchName: async ({ actions, launch }) => {
-    launch(actions.requestName());
+  fetchName: async ({ actions }) => {
+    actions.requestName();
 
     const response = await fetch(`[url]`);
     const data = await response.json();
 
-    launch(actions.receiveName({ name: data.name }));
+    actions.receiveName({ name: data.name });
   },
 };
 

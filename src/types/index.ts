@@ -50,8 +50,6 @@ export interface ServiceActionContext {
   actions: {
     [actionName: string]: LaunchAction;
   };
-  /** Function to launch actions. */
-  launch: Launcher;
 }
 
 /**
@@ -80,8 +78,6 @@ export interface LaunchContext {
       [actionName: string]: LaunchAction;
     };
   };
-  /** Function to launch actions. */
-  launch: Launcher;
 }
 
 /**

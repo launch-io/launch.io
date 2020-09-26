@@ -1,12 +1,6 @@
 import reducer from "./reducer";
 import history from "../services/history";
-import {
-  Service,
-  ServiceOptions,
-  ServiceApi,
-  LaunchActions,
-  ServiceActions,
-} from "../types";
+import { Service, ServiceOptions, ServiceApi } from "../types";
 
 /**
  * Takes an `array` of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component.
@@ -18,56 +12,63 @@ const createServiceApi = (
   services: Service[],
   options: ServiceOptions = { enableTimeTravel: false }
 ): ServiceApi => {
-  const allServices: Service[] = [
+  const servicesToProcess: Service[] = [
       ...services,
       ...(options.enableTimeTravel ? [history] : []),
     ],
-    initialState = {},
-    launchActions: LaunchActions = {},
-    serviceActions: ServiceActions = {};
+    initialState = {};
 
-  allServices.forEach((service, index) => {
-    const launchActionFunctions = {},
-      serviceActionFunctions = {};
+  const allActions = servicesToProcess.reduce(
+    (allServices, service) => {
+      if (!service.name) {
+        throw new Error(
+          `[Launch.IO]: all services must contain a name property.`
+        );
+      }
+      if (!service.initialState) {
+        throw new Error(
+          `[Launch.IO]: ${service.name} must contain an initialState object.`
+        );
+      }
+      if (!service.actions) {
+        throw new Error(`[Launch.IO]: ${service.name} must contain actions.`);
+      }
+      if (allServices.launchActions[service.name]) {
+        throw new Error(
+          `[Launch.IO]: Service with a name of ${service.name} already exists.`
+        );
+      }
 
-    if (!service.name) {
-      throw new Error(
-        `[Launch.IO]: service at [${index}] must contain a name property.`
+      initialState[service.name] = service.initialState;
+
+      const allServiceActions = Object.keys(service.actions).reduce(
+        (actions, actionKey) => {
+          actions.launchActionFunctions[actionKey] = (payload) => ({
+            serviceName: service.name,
+            actionName: actionKey,
+            payload,
+          });
+          actions.serviceActionFunctions[actionKey] =
+            service.actions[actionKey];
+          return actions;
+        },
+        { launchActionFunctions: {}, serviceActionFunctions: {} }
       );
-    }
-    if (!service.initialState) {
-      throw new Error(
-        `[Launch.IO]: ${service.name} must contain an initialState object.`
-      );
-    }
-    if (!service.actions) {
-      throw new Error(`[Launch.IO]: ${service.name} must contain actions.`);
-    }
-    if (launchActions[service.name]) {
-      throw new Error(
-        `[Launch.IO]: Service with a name of ${service.name} already exists.`
-      );
-    }
 
-    initialState[service.name] = service.initialState;
+      allServices.launchActions[service.name] =
+        allServiceActions.launchActionFunctions;
+      allServices.serviceActions[service.name] =
+        allServiceActions.serviceActionFunctions;
 
-    Object.keys(service.actions).forEach((actionKey) => {
-      launchActionFunctions[actionKey] = (payload) => ({
-        serviceName: service.name,
-        actionName: actionKey,
-        payload,
-      });
-      serviceActionFunctions[actionKey] = service.actions[actionKey];
-    });
-
-    launchActions[service.name] = launchActionFunctions;
-    serviceActions[service.name] = serviceActionFunctions;
-  });
+      return allServices;
+    },
+    { launchActions: {}, serviceActions: {} }
+  );
 
   return {
     initialState,
-    actions: launchActions,
-    reducer: reducer(launchActions, serviceActions),
+    actions: allActions.launchActions,
+    reducer: reducer(allActions.launchActions, allActions.serviceActions),
   };
 };
 

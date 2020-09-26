@@ -11,13 +11,13 @@ const initialState: NameState = {
 
 const actions = {
   updateName: ({ state }, payload) => ({ ...state, ...payload }),
-  fetchName: async ({ actions, launch }) => {
-    launch(actions.requestName());
+  fetchName: async ({ actions }) => {
+    actions.requestName();
 
     const response = await fetch(`https://swapi.dev/api/people/1`);
     const data = await response.json();
 
-    launch(actions.receiveName({ name: data.name }));
+    actions.receiveName({ name: data.name });
   },
   requestName: ({ state }) => ({ ...state, isLoading: true }),
   receiveName: ({ state }, payload) => {

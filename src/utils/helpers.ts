@@ -9,8 +9,7 @@ const getNewState = (
   serviceActions: ServiceActions,
   launchAction: {
     [actionName: string]: LaunchAction;
-  },
-  launch: Launcher
+  }
 ): any => {
   const newState = { ...initialState };
 
@@ -20,7 +19,6 @@ const getNewState = (
       {
         state: newState[action.serviceName],
         actions: launchAction,
-        launch,
       },
       action.payload
     );

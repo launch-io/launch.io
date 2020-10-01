@@ -1,5 +1,11 @@
 name: "Launch.IO Build"
-on: [pull_request, push]
+on:
+  push:
+    branches:
+      - develop
+  pull_request:
+    branches:
+      - develop
 
 jobs:
   build:

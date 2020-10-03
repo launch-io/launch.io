@@ -1,6 +1,7 @@
 import React from "react";
 import NameForm from "../features/name/NameForm";
 import CalculatorForm from "../features/calculator/CalculatorForm";
+import CalculatorDisplay from "../features/calculator/CalculatorDisplay";
 import HistoryForm from "../features/history/HistoryForm";
 
 export default function Main() {
@@ -8,6 +9,7 @@ export default function Main() {
     <div>
       <NameForm />
       <CalculatorForm />
+      <CalculatorDisplay />
       <HistoryForm />
     </div>
   );

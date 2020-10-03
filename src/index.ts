@@ -1,4 +1,4 @@
 import LaunchProvider from "./components/LaunchProvider";
 import useLaunch from "./hooks/useLaunch";
-
-export { LaunchProvider, useLaunch };
+import { useLaunchSelector } from "./hooks/useLaunchSelector";
+export { LaunchProvider, useLaunch, useLaunchSelector };

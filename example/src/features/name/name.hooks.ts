@@ -1,26 +1,18 @@
-import { useEffect, useMemo } from "react";
-import { useLaunch } from "launch.io";
+import { useEffect } from "react";
+import { useLaunchSelector } from "launch.io";
 
 // this example doesn't use useLaunchSelector
 // and instead memoizes in the consuming hook
 export const useName = () => {
-  const { state, actions } = useLaunch();
+  const actions = useLaunchSelector(({ actions }) => actions.name);
+  const state: any = useLaunchSelector(({ state }) => state.name);
 
   useEffect(() => {
-    actions.name.fetchName();
-  }, [actions.name]);
+    actions.fetchName();
+  }, [actions]);
 
-  return useMemo(() => {
-    return {
-      ...state.name,
-      ...actions.name,
-    };
-  }, [state.name, actions.name]);
-
-  // If we didn't `useMemo` and did this instead
-  // we would rerender every context change
-  // return {
-  //   ...state.name,
-  //   ...actions.name,
-  // };
+  return {
+    ...actions,
+    ...state,
+  };
 };

@@ -9,7 +9,6 @@ const services = [nameService, calculatorService];
 const options = { enableTimeTravel: true };
 export default function App() {
   useLaunchProvider(services, options);
-  console.log("RENDERING APP");
   return (
     <div className="App">
       <header className="App-header">

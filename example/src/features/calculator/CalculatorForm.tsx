@@ -1,14 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useCalculator } from "./calculator.hooks";
 
 const CalculatorForm = () => {
   let { value, increase, decrease } = useCalculator();
-  console.log("CalculatorForm ->  { value, increase, decrease }", {
-    value,
-    increase,
-    decrease,
+  useEffect(() => {
+    console.log("CalculatorForm -> RENDER", value);
   });
-  console.log("CalculatorForm -> RENDER", value);
   return (
     <div>
       <p>Value: {value}</p>

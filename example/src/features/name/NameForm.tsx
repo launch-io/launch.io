@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useName } from "./name.hooks";
 
 const NameForm = () => {
   const { firstName, lastName, updateName } = useName();
-  console.log("NameForm Render", firstName, lastName);
+  useEffect(() => {
+    console.log("NameForm -> RENDER", firstName, lastName);
+  });
   return (
     <div>
       <form>

@@ -29,7 +29,7 @@ const NameForm = () => {
           <input
             value={name.lastName}
             onChange={(e) => {
-              name.updatedName({ lastName: e.target.value });
+              name.updateName({ lastName: e.target.value });
             }}
           />
           <h3>{name.lastName}</h3>

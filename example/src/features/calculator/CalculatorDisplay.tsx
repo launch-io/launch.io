@@ -1,9 +1,8 @@
 import React, { useEffect } from "react";
 import { useLaunchSelector } from "launch.io";
-import { CalculatorState } from "./calculator.service";
 
 const CalculatorDisplay = () => {
-  const value = useLaunchSelector<CalculatorState>(
+  const value = useLaunchSelector<number>(
     (context) => context.state.calculator.value
   );
   useEffect(() => {

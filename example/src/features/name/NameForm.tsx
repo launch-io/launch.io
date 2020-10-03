@@ -1,10 +1,15 @@
 import React, { useEffect } from "react";
-import { useName } from "./name.hooks";
+import { useLaunchService } from "launch.io";
 
 const NameForm = () => {
-  const { firstName, lastName, updateName } = useName();
+  const name = useLaunchService("name");
+
   useEffect(() => {
-    console.log("NameForm -> RENDER", firstName, lastName);
+    name.fetchName();
+  }, [name.fetchName]);
+
+  useEffect(() => {
+    console.log("NameForm -> RENDER", name.firstName, name.lastName);
   });
   return (
     <div>
@@ -12,22 +17,22 @@ const NameForm = () => {
         <div>
           <label>First Name</label>
           <input
-            value={firstName}
+            value={name.firstName}
             onChange={(e) => {
-              updateName({ firstName: e.target.value });
+              name.updateName({ firstName: e.target.value });
             }}
           />
-          <h3>{firstName}</h3>
+          <h3>{name.firstName}</h3>
         </div>
         <div>
           <label>Last Name</label>
           <input
-            value={lastName}
+            value={name.lastName}
             onChange={(e) => {
-              updateName({ lastName: e.target.value });
+              name.updatedName({ lastName: e.target.value });
             }}
           />
-          <h3>{lastName}</h3>
+          <h3>{name.lastName}</h3>
         </div>
       </form>
     </div>

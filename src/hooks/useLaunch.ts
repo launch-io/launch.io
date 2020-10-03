@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import {
   getContextListener,
   useContextListener,
@@ -18,7 +18,7 @@ import { LaunchContext } from "../types";
  *
  * @return {{state: Object, actions: Object }} A `Launch.IO` object containing the current `state`, and object of launch `actions`
  */
-const useLaunch = (): LaunchContext => {
+export const useLaunch = (): LaunchContext => {
   const [context, setContext] = useState(() => getContextListener().snapshot());
   useContextListener(setContext);
 
@@ -29,4 +29,37 @@ const useLaunch = (): LaunchContext => {
   };
 };
 
-export default useLaunch;
+export const useLaunchSelector = <T>(
+  selector: (context: LaunchContext) => T
+): T => {
+  const selectedStateRef = useRef();
+  const selectorRef = useRef(selector);
+  const [selectedState, setSelectedState] = useState<any>(() =>
+    selector(getContextListener().snapshot())
+  );
+
+  useLayoutEffect(() => {
+    selectedStateRef.current = selectedState;
+    selectorRef.current = selector;
+  });
+
+  const onContextChange = useCallback((context) => {
+    const newState = selectorRef.current(context);
+    if (newState !== selectedStateRef.current) {
+      setSelectedState(newState);
+    }
+  }, []);
+  useContextListener(onContextChange);
+
+  return selectedState;
+};
+
+export const useLaunchService = (service: string) => {
+  const state = useLaunchSelector(({ state }) => state[service]);
+  const actions = useLaunchSelector(({ actions }) => actions[service]);
+
+  return {
+    ...state,
+    ...actions,
+  };
+};

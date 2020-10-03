@@ -8,7 +8,8 @@
     "allowJs": true,
     "noImplicitAny": false,
     "moduleResolution": "node",
-    "allowSyntheticDefaultImports": true
+    "allowSyntheticDefaultImports": true,
+    "downlevelIteration": true
   },
   "include": ["./src/**/*"],
   "exclude": ["node_modules"]

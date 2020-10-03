@@ -1,9 +1,8 @@
 /* eslint-disable react/prop-types */
-import React, { useEffect, useLayoutEffect, useMemo, useRef } from "react";
-import Context from "./Context";
+import { useLayoutEffect, useMemo } from "react";
 import useLaunchReducer from "../hooks/useLaunchReducer";
 import createServiceApi from "../utils/createServiceApi";
-import { LaunchContext, Service, ServiceOptions } from "../types";
+import { LaunchContext } from "../types";
 import { Observable } from "../utils/Observable";
 
 /**
@@ -14,14 +13,10 @@ import { Observable } from "../utils/Observable";
  * @return `Launch.IO` `LaunchProvider` `React` Component
  * */
 
-let _contextListener: Observable<LaunchContext> = new Observable(null);
+const _contextListener: Observable<LaunchContext> = new Observable(null);
 export const getContextListener = () => _contextListener;
 
-const LaunchProvider: React.FC<{
-  services: Service[];
-  options: ServiceOptions;
-  children: any;
-}> = ({ services, options, children }) => {
+export const useLaunchProvider = (services, options) => {
   const serviceApi = useMemo(() => {
     return createServiceApi(services, options);
   }, [services, options]);
@@ -31,14 +26,42 @@ const LaunchProvider: React.FC<{
     serviceApi.initialState
   );
 
+  const actions = useMemo(() => {
+    return bindActions(serviceApi.actions, dispatch);
+  }, [serviceApi.actions, dispatch]);
+
   const contextValue = {
     state,
-    actions: serviceApi.actions,
+    actions,
     dispatch,
   };
 
   getContextListener().update(contextValue);
-  return <Context.Provider value={contextValue}>{children}</Context.Provider>;
 };
 
-export default LaunchProvider;
+export const useContextListener = (cb) => {
+  useLayoutEffect(() => {
+    const { disconnect } = getContextListener().subscribe(cb);
+
+    return () => {
+      disconnect();
+    };
+  }, [cb]);
+};
+
+const bindActions = (unboundActions, dispatch) => {
+  return Object.keys(unboundActions).reduce(
+    (boundLaunchActions, serviceName) => {
+      boundLaunchActions[serviceName] = Object.keys(
+        unboundActions[serviceName]
+      ).reduce((serviceActions, serviceActionName) => {
+        serviceActions[serviceActionName] = (...args) =>
+          dispatch(unboundActions[serviceName][serviceActionName](...args));
+        return serviceActions;
+      }, {});
+
+      return boundLaunchActions;
+    },
+    {}
+  );
+};

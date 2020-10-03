@@ -1,5 +1,8 @@
-import { useContext, useMemo } from "react";
-import Context from "../components/Context";
+import { useState } from "react";
+import {
+  getContextListener,
+  useContextListener,
+} from "../components/LaunchProvider";
 import { LaunchContext } from "../types";
 
 /**
@@ -16,28 +19,13 @@ import { LaunchContext } from "../types";
  * @return {{state: Object, actions: Object }} A `Launch.IO` object containing the current `state`, and object of launch `actions`
  */
 const useLaunch = (): LaunchContext => {
-  const context = useContext(Context);
-  const actions = useMemo(() => {
-    return Object.keys(context.actions).reduce(
-      (boundLaunchActions, serviceName) => {
-        boundLaunchActions[serviceName] = Object.keys(
-          context.actions[serviceName]
-        ).reduce((serviceActions, serviceActionName) => {
-          serviceActions[serviceActionName] = (...args) =>
-            context.dispatch(
-              context.actions[serviceName][serviceActionName](...args)
-            );
-          return serviceActions;
-        }, {});
+  const [context, setContext] = useState(() => getContextListener().snapshot());
+  useContextListener(setContext);
 
-        return boundLaunchActions;
-      },
-      {}
-    );
-  }, [context.actions, context.dispatch]);
   return {
     state: context.state,
-    actions,
+    actions: context.actions,
+    dispatch: context.dispatch,
   };
 };
 

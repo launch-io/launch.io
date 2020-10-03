@@ -4,7 +4,7 @@ import CalculatorForm from "../features/calculator/CalculatorForm";
 import CalculatorDisplay from "../features/calculator/CalculatorDisplay";
 import HistoryForm from "../features/history/HistoryForm";
 
-export default function Main() {
+export default React.memo(function Main() {
   return (
     <div>
       <NameForm />
@@ -13,4 +13,4 @@ export default function Main() {
       <HistoryForm />
     </div>
   );
-}
+});

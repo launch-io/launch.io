@@ -9,14 +9,16 @@ import {
 // When launch context changes, try to re-run the selector
 // function. If the new selector result !== old selector result
 // then trigger a re-render.
-import Context from "../components/Context";
 import { getContextListener } from "../components/LaunchProvider";
+import { LaunchContext } from "../types";
 
-export type Selector = <T>({ state }) => T;
+// export type Selector = <T>(context: LaunchContext) => T;
 
-export const useLaunchSelector = <T>(selector: Selector): T => {
+export const useLaunchSelector = <T>(
+  selector: (context: LaunchContext) => T
+): T => {
   const selectedStateRef = useRef();
-  let [selectedState, setSelectedState] = useState<any>();
+  const [selectedState, setSelectedState] = useState<any>();
 
   useLayoutEffect(() => {
     selectedStateRef.current = selectedState;
@@ -24,12 +26,12 @@ export const useLaunchSelector = <T>(selector: Selector): T => {
 
   useLayoutEffect(() => {
     const onContextChange = (context) => {
-      let newState = selector(context);
+      const newState = selector(context);
       if (newState !== selectedStateRef.current) {
         setSelectedState(newState);
       }
     };
-    let { disconnect } = getContextListener().subscribe(onContextChange);
+    const { disconnect } = getContextListener().subscribe(onContextChange);
 
     return () => {
       disconnect();

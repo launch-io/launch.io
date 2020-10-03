@@ -2,12 +2,11 @@ import { useMemo } from "react";
 import { useLaunch, useLaunchSelector } from "launch.io";
 
 export const useCalculator = () => {
-  const { actions } = useLaunch();
-  const state: any = useLaunchSelector(({ state }) => state.calculator);
+  const { actions, state } = useLaunch();
 
   return useMemo(() => {
     return {
-      ...state,
+      ...state.calculator,
       ...actions.calculator,
     };
   }, [state, actions.calculator]);

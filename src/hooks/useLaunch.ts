@@ -22,11 +22,7 @@ export const useLaunch = (): LaunchContext => {
   const [context, setContext] = useState(() => getContextListener().snapshot());
   useContextListener(setContext);
 
-  return {
-    state: context.state,
-    actions: context.actions,
-    dispatch: context.dispatch,
-  };
+  return context;
 };
 
 export const useLaunchSelector = <T>(

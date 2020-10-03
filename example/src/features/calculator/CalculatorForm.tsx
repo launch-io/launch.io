@@ -9,7 +9,7 @@ const CalculatorForm = () => {
   return (
     <div>
       <p>Value: {value}</p>
-      <button type="button" onClick={() => increase()}>
+      <button type="button" onClick={increase}>
         Increase
       </button>
       <button type="button" onClick={decrease}>

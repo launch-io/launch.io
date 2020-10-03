@@ -3,6 +3,7 @@ import { useName } from "./name.hooks";
 
 const NameForm = () => {
   const { firstName, lastName, updateName } = useName();
+  console.log("NameForm Render", firstName, lastName);
   return (
     <div>
       <form>

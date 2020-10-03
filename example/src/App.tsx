@@ -5,12 +5,12 @@ import nameService from "./features/name/name.service";
 import calculatorService from "./features/calculator/calculator.service";
 import "./App.css";
 
+const services = [nameService, calculatorService];
+const options = { enableTimeTravel: true };
 export default function App() {
+  console.log("RENDERING APP");
   return (
-    <LaunchProvider
-      services={[nameService, calculatorService]}
-      options={{ enableTimeTravel: true }}
-    >
+    <LaunchProvider services={services} options={options}>
       <div className="App">
         <header className="App-header">
           <img className="Logo" src="logo-small.png" alt="Launch.IO"></img>

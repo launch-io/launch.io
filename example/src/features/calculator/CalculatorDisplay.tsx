@@ -6,6 +6,7 @@ const CalculatorDisplay = () => {
   const value = useLaunchSelector<CalculatorState>(
     ({ state }) => state.calculator.value
   );
+  //   const value = 2;
 
   console.log("CalculatorDisplay -> render", value);
   return <h2>Calculator: {value}</h2>;

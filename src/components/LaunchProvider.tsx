@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 import { useLayoutEffect, useMemo } from "react";
-import useLaunchReducer from "../hooks/useLaunchReducer";
 import createServiceApi from "../utils/createServiceApi";
 import { LaunchContext } from "../types";
 import { Observable } from "../utils/Observable";
@@ -13,30 +12,34 @@ import { Observable } from "../utils/Observable";
  * @return `Launch.IO` `LaunchProvider` `React` Component
  * */
 
-const _contextListener: Observable<LaunchContext> = new Observable(null);
-export const getContextListener = () => _contextListener;
+let _ctx: Observable<LaunchContext> = new Observable(null);
+export const getContextListener = () => _ctx;
 
-export const useLaunchProvider = (services, options) => {
-  const serviceApi = useMemo(() => {
-    return createServiceApi(services, options);
-  }, [services, options]);
+export const initializeLaunch = (services, options) => {
+  const serviceApi = createServiceApi(services, options);
 
-  const [state, dispatch] = useLaunchReducer(
-    serviceApi.reducer,
-    serviceApi.initialState
-  );
-
-  const actions = useMemo(() => {
-    return bindActions(serviceApi.actions, dispatch);
-  }, [serviceApi.actions, dispatch]);
+  const dispatch = (action) => {
+    action = {
+      launch: dispatch,
+      ...action,
+    };
+    let prevCtx = _ctx.snapshot();
+    let newState = serviceApi.reducer(prevCtx.state, action);
+    if (newState !== prevCtx.state) {
+      _ctx.update({
+        ...prevCtx,
+        state: newState,
+      });
+    }
+  };
 
   const contextValue = {
-    state,
-    actions,
+    state: serviceApi.initialState,
+    actions: bindActions(serviceApi.actions, dispatch),
     dispatch,
   };
 
-  getContextListener().update(contextValue);
+  _ctx.update(contextValue);
 };
 
 export const useContextListener = (cb) => {

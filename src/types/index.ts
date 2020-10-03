@@ -78,6 +78,7 @@ export interface LaunchContext {
       [actionName: string]: LaunchAction;
     };
   };
+  dispatch: (action: any) => void;
 }
 
 /**

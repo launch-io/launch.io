@@ -35,7 +35,7 @@ const reducer = (
     action.payload
   );
 
-  if (updatedState) {
+  if (updatedState && !checkIsPromise(updatedState)) {
     newState[action.serviceName] = updatedState;
     newState._history = history.actions.add(
       {
@@ -63,4 +63,12 @@ export default (
   dispatch
 ) => (state: any, action: Action): any => {
   return reducer(launchActions, serviceActions, dispatch, state, action);
+};
+
+const checkIsPromise = (value: any) => {
+  return (
+    !!value &&
+    (typeof value === "object" || typeof value === "function") &&
+    typeof value.then === "function"
+  );
 };

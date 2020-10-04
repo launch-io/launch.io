@@ -1,4 +1,4 @@
-import reducer from "./reducer";
+import createReducer from "./reducer";
 import history from "../services/history";
 import { Service, ServiceOptions, ServiceApi } from "../types";
 
@@ -68,7 +68,13 @@ const createServiceApi = (
   return {
     initialState,
     actions: allActions.launchActions,
-    reducer: reducer(allActions.launchActions, allActions.serviceActions),
+    createReducer: (dispatch) => {
+      return createReducer(
+        allActions.launchActions,
+        allActions.serviceActions,
+        dispatch
+      );
+    },
   };
 };
 

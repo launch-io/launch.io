@@ -3,33 +3,26 @@
 
 import { LaunchActions, ServiceActions, Action } from "../types";
 import history from "../services/history";
-
-const getBoundLaunchActions = (launch, launchActions) =>
-  Object.keys(launchActions).reduce((boundLaunchActions, launchActionName) => {
-    boundLaunchActions[launchActionName] = (...args) =>
-      launch(launchActions[launchActionName](...args));
-    return boundLaunchActions;
-  }, {});
+import { bindActions } from "../components/LaunchProvider";
 
 const reducer = (
   launchActions: LaunchActions,
   serviceActions: ServiceActions,
+  dispatch,
   state: any,
   action: Action
 ): any => {
   const serviceAction = serviceActions[action.serviceName][action.actionName];
   let newState = { ...state };
 
+  const boundActions = bindActions(launchActions, dispatch);
   if (action.serviceName === history.name) {
     newState = serviceAction(
       {
         state,
-        actions: getBoundLaunchActions(
-          action.launch,
-          launchActions[history.name]
-        ),
+        actions: boundActions[history.name],
       },
-      serviceActions
+      { serviceActions, boundActions }
     );
     return newState;
   }
@@ -37,10 +30,7 @@ const reducer = (
   const updatedState = serviceAction(
     {
       state: state[action.serviceName],
-      actions: getBoundLaunchActions(
-        action.launch,
-        launchActions[action.serviceName]
-      ),
+      actions: boundActions[action.serviceName],
     },
     action.payload
   );
@@ -50,10 +40,7 @@ const reducer = (
     newState._history = history.actions.add(
       {
         state,
-        actions: getBoundLaunchActions(
-          action.launch,
-          launchActions[history.name]
-        ),
+        actions: boundActions[history.name],
       },
       {
         newState,
@@ -72,7 +59,8 @@ const reducer = (
 
 export default (
   launchActions: LaunchActions,
-  serviceActions: ServiceActions
+  serviceActions: ServiceActions,
+  dispatch
 ) => (state: any, action: Action): any => {
-  return reducer(launchActions, serviceActions, state, action);
+  return reducer(launchActions, serviceActions, dispatch, state, action);
 };

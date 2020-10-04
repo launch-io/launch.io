@@ -13,7 +13,7 @@ const initialState = {
 const actions = {
   stepBack: (
     { state, actions }: ServiceActionContext,
-    serviceActions: ServiceActions
+    { serviceActions, boundActions }
   ): any => {
     if (state._history.past.length === 0) {
       return state;
@@ -25,7 +25,7 @@ const actions = {
         { ...state._history.initialGlobalState },
         newPast,
         serviceActions,
-        actions
+        boundActions
       );
 
     return {
@@ -39,7 +39,7 @@ const actions = {
   },
   stepForward: (
     { state, actions }: ServiceActionContext,
-    serviceActions: ServiceActions
+    { serviceActions, boundActions }
   ): any => {
     if (state._history.future.length === 0) {
       return state;
@@ -52,7 +52,7 @@ const actions = {
         { ...state._history.initialGlobalState },
         newPast,
         serviceActions,
-        actions
+        boundActions
       );
 
     return {

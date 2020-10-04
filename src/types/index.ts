@@ -37,7 +37,7 @@ export interface ServiceApi {
     };
   };
   /** Pure function used to return new state. */
-  reducer: Reducer;
+  createReducer: any;
 }
 
 /**

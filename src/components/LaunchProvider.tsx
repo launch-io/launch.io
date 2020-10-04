@@ -19,12 +19,8 @@ export const initializeLaunch = (services, options) => {
   const serviceApi = createServiceApi(services, options);
 
   const dispatch = (action) => {
-    action = {
-      launch: dispatch,
-      ...action,
-    };
     let prevCtx = _ctx.snapshot();
-    let newState = serviceApi.reducer(prevCtx.state, action);
+    let newState = serviceApi.createReducer(dispatch)(prevCtx.state, action);
     if (newState !== prevCtx.state) {
       _ctx.update({
         ...prevCtx,
@@ -52,7 +48,7 @@ export const useContextListener = (cb) => {
   }, [cb]);
 };
 
-const bindActions = (unboundActions, dispatch) => {
+export const bindActions = (unboundActions, dispatch) => {
   return Object.keys(unboundActions).reduce(
     (boundLaunchActions, serviceName) => {
       boundLaunchActions[serviceName] = Object.keys(

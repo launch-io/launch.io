@@ -12,15 +12,15 @@ import { Observable } from "../utils/Observable";
  * @return `Launch.IO` `LaunchProvider` `React` Component
  * */
 
-let _ctx: Observable<LaunchContext> = new Observable(null);
+const _ctx: Observable<LaunchContext> = new Observable(null);
 export const getContextListener = () => _ctx;
 
 export const initializeLaunch = (services, options) => {
   const serviceApi = createServiceApi(services, options);
 
   const dispatch = (action) => {
-    let prevCtx = _ctx.snapshot();
-    let newState = serviceApi.createReducer(dispatch)(prevCtx.state, action);
+    const prevCtx = _ctx.snapshot();
+    const newState = serviceApi.createReducer(dispatch)(prevCtx.state, action);
     if (newState !== prevCtx.state) {
       _ctx.update({
         ...prevCtx,

@@ -10,10 +10,8 @@ const getNewState = (
   launchActions: any
 ): any => {
   const newState = { ...initialState };
-  console.log("serviceActions", serviceActions, actions, launchActions);
 
   actions.forEach((action) => {
-    console.log("REPLAY action", action);
     const serviceAction = serviceActions[action.serviceName][action.actionName];
     newState[action.serviceName] = serviceAction(
       {

@@ -1,6 +1,6 @@
-# ![Launch.IO Logo](../../logo/logo-small.png) LaunchProvider
+# ![Launch.IO Logo](../../logo/logo-small.png) initializeLaunch
 
-`LaunchProvider` is a `React` component that should wrap your application.
+`initializeLaunch` is used to initialize your React application with Launch.IO. It should be initialized before your application is first rendered.
 
 ### Props
 
@@ -18,7 +18,7 @@ Contains the Launch.IO configuration properties:
 
 ```jsx
 import React from "react";
-import { LaunchProvider } from "launch.io";
+import { initializeLaunch } from "launch.io";
 
 const calculatorService = {
   name: "calculator",
@@ -33,15 +33,10 @@ const calculatorService = {
   },
 };
 
+initializeLaunch([calculatorService], { enableTimeTravel: true });
+
 const App = () => {
-  return (
-    <LaunchProvider
-      services={[calculatorService]}
-      options={{ enableTimeTravel: true }}
-    >
-      <div className="MyApp">...</div>
-    </LaunchProvider>
-  );
+  return <div className="MyApp">...</div>;
 };
 
 export default App;

@@ -3,7 +3,7 @@
 
 import { LaunchActions, ServiceActions, Action } from "../types";
 import history from "../services/history";
-import { bindActions } from "../components/LaunchProvider";
+import { bindActions } from "../utils/initializeLaunch";
 
 const reducer = (
   launchActions: LaunchActions,

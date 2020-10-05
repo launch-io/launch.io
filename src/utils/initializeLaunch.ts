@@ -4,17 +4,15 @@ import createServiceApi from "../utils/createServiceApi";
 import { LaunchContext } from "../types";
 import { Observable } from "../utils/Observable";
 
-/**
- * `LaunchProvider` should wrap your `React` application.
- *
- * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (object of functions) properties.
- * @param {Object} options A `Launch.IO` `ServiceOptions` object.
- * @return `Launch.IO` `LaunchProvider` `React` Component
- * */
-
 const _ctx: Observable<LaunchContext> = new Observable(null);
 export const getContextListener = () => _ctx;
 
+/**
+ * Initialize a React application with Launch.IO.
+ *
+ * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (object of functions) properties.
+ * @param {Object} options A `Launch.IO` `ServiceOptions` object.
+ * */
 export const initializeLaunch = (services, options) => {
   const serviceApi = createServiceApi(services, options);
 

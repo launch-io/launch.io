@@ -2,11 +2,13 @@ import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import {
   getContextListener,
   useContextListener,
-} from "../components/LaunchProvider";
+} from "../utils/initializeLaunch";
 import { LaunchContext } from "../types";
 
 /**
- * Returns a `Launch.IO` object containing current `state`, and launch `actions`.
+ * A React hook that takes a `selector` function and returns a context object, containing Launch.IO state and/or actions, based on the selection within the `selector` function.
+ *
+ * `const selection = useLaunch({ state, actions} => ({ ... }));`
  *
  * `state` is an object that will contain the full application state.
  * These can be accessed via the name of the service along with the associating state property.
@@ -16,18 +18,8 @@ import { LaunchContext } from "../types";
  * These can be accessed via the name of the service along with the associating action.
  * For example, `actions.[ServiceName].[LaunchAction]`
  *
- * @return {{state: Object, actions: Object }} A `Launch.IO` object containing the current `state`, and object of launch `actions`
  */
-export const useLaunch = (): LaunchContext => {
-  const [context, setContext] = useState(() => getContextListener().snapshot());
-  useContextListener(setContext);
-
-  return context;
-};
-
-export const useLaunchSelector = <T>(
-  selector: (context: LaunchContext) => T
-): T => {
+export const useLaunch = <T>(selector: (context: LaunchContext) => T): T => {
   const selectedStateRef = useRef();
   const selectorRef = useRef(selector);
   const [selectedState, setSelectedState] = useState<any>(() =>
@@ -48,14 +40,4 @@ export const useLaunchSelector = <T>(
   useContextListener(onContextChange);
 
   return selectedState;
-};
-
-export const useLaunchService = (service: string) => {
-  const state = useLaunchSelector(({ state }) => state[service]);
-  const actions = useLaunchSelector(({ actions }) => actions[service]);
-
-  return {
-    ...state,
-    ...actions,
-  };
 };

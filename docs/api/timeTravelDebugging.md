@@ -8,7 +8,7 @@ Anytime the application steps forward or backwards in time, Launch.IO will repla
 
 ### Enable
 
-Time Travel debugging is enabled by setting `enableTimeTravel` to `true` for the Launch.IO options provided to the [`LaunchProvider`]('./launchProvider).
+Time Travel debugging is enabled by setting `enableTimeTravel` to `true` for the Launch.IO options provided to [`initializeLaunch`]('./initializeLaunch.md).
 
 ### Access
 
@@ -21,22 +21,16 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const TimeTravel = (props) => {
-  const { actions } = useLaunch();
-
-  const rewind = () => {
-    actions._history.stepBack();
-  };
-
-  const fastForward = () => {
-    actions._history.stepForward();
-  };
+  const history = useLaunch(({ actions }) => ({
+    ...actions._history,
+  }));
 
   return (
     <div>
-      <button type="button" onClick={rewind}>
+      <button type="button" onClick={history.stepBack}>
         Rewind Time
       </button>
-      <button type="button" onClick={fastFoward}>
+      <button type="button" onClick={history.stepForward}>
         Fast Forward Time
       </button>
     </div>

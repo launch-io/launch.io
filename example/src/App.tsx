@@ -5,9 +5,7 @@ import nameService from "./features/name/name.service";
 import calculatorService from "./features/calculator/calculator.service";
 import "./App.css";
 
-const services = [nameService, calculatorService];
-const options = { enableTimeTravel: true };
-initializeLaunch(services, options);
+initializeLaunch([nameService, calculatorService], { enableTimeTravel: true });
 
 export default function App() {
   return (

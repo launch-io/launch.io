@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
-import { useLaunchSelector } from "launch.io";
+import { useLaunch } from "launch.io";
 
 const CalculatorDisplay = () => {
-  const value = useLaunchSelector<number>(
-    (context) => context.state.calculator.value
-  );
+  const value = useLaunch(({ state }) => state.calculator.value);
+
   useEffect(() => {
-    console.log("CalculatorDisplay -> RENDER", value);
+    console.log("CalculatorDisplay -> RENDER");
   });
-  return <h2>Calculator: {value}</h2>;
+
+  return <p>Value: {value}</p>;
 };
 
 export default React.memo(CalculatorDisplay);

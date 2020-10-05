@@ -41,21 +41,16 @@ const calculatorService = {
 };
 ```
 
-Wrap your React application with the Launch.IO `LaunchProvider` component and pass your `array` of application services along with any `options` you'd like to specify.
+Initialize your React application with Launch.IO using `initializeLaunch` and pass your `array` of application services along with any `options` you'd like to specify.
 
 ```jsx
 import React from "react";
-import { LaunchProvider } from "launch.io";
+import { initializeLaunch } from "launch.io";
+
+initializeLaunch([calculatorService], { enableTimeTravel: true });
 
 const App = () => {
-  return (
-    <LaunchProvider
-      services={[calculatorService]}
-      options={{ enableTimeTravel: true }}
-    >
-      <div className="MyApp">...</div>
-    </LaunchProvider>
-  );
+  return <div className="MyApp">...</div>;
 };
 
 export default App;
@@ -68,23 +63,18 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
-  const { state, actions } = useLaunch();
-
-  const handleIncrease = () => {
-    actions.calculator.increase();
-  };
-
-  const handleDecrease = () => {
-    actions.calculator.decrease();
-  };
+  const calculator = useLaunch(({ state, actions }) => ({
+    ...state.calculator,
+    ...actions.calculator,
+  }));
 
   return (
     <div>
-      <p>Value: {state.calculator.value}</p>
-      <button type="button" onClick={handleIncrease}>
+      <p>Value: {calculator.value}</p>
+      <button type="button" onClick={calculator.increase}>
         Increase
       </button>
-      <button type="button" onClick={handleDecrease}>
+      <button type="button" onClick={calculator.decrease}>
         Decrease
       </button>
     </div>
@@ -94,9 +84,7 @@ const CalculatorForm = () => {
 
 ## Tell Me More
 
-Launch.IO is an abstraction around React's [`useContext`](https://reactjs.org/docs/hooks-reference.html#usecontext) and [`useReducer`](https://reactjs.org/docs/hooks-reference.html#usereducer) with a healthy dose of time travel debugging.
-
-It relies on pure functions so it has the predictable state management of [Redux](https://github.com/reduxjs/redux), except there is no boilerplate and it's not Redux.
+Launch.IO relies on pure functions so it has the predictable state management and time travel debugging of [Redux](https://github.com/reduxjs/redux), except there is no boilerplate and it's not Redux.
 
 ## Documentation
 

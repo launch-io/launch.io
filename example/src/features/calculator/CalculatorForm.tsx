@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
-import { useLaunchService } from "launch.io";
+import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
-  let { value, increase, decrease } = useLaunchService("calculator");
+  const calculator = useLaunch(({ actions }) => ({
+    ...actions.calculator,
+  }));
 
   useEffect(() => {
-    console.log("CalculatorForm -> RENDER", value);
+    console.log("CalculatorForm -> RENDER");
   });
 
   return (
     <div>
-      <p>Value: {value}</p>
-      <button type="button" onClick={() => increase()}>
+      <button type="button" onClick={calculator.increase}>
         Increase
       </button>
-      <button type="button" onClick={() => decrease()}>
+      <button type="button" onClick={calculator.decrease}>
         Decrease
       </button>
     </div>

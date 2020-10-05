@@ -1,16 +1,20 @@
 import React, { useEffect } from "react";
-import { useLaunchService } from "launch.io";
+import { useLaunch } from "launch.io";
 
 const NameForm = () => {
-  const name = useLaunchService("name");
+  const name = useLaunch(({ state, actions }) => ({
+    ...state.name,
+    ...actions.name,
+  }));
 
   useEffect(() => {
     name.fetchName();
   }, [name.fetchName]);
 
   useEffect(() => {
-    console.log("NameForm -> RENDER", name.firstName, name.lastName);
+    console.log("NameForm -> RENDER");
   });
+
   return (
     <div>
       <form>
@@ -39,4 +43,4 @@ const NameForm = () => {
   );
 };
 
-export default NameForm;
+export default React.memo(NameForm);

@@ -3,7 +3,7 @@
 /**
  * The `Launch.IO` configuration options available for use with `ServiceApi`.
  */
-export interface ServiceOptions {
+export interface LaunchOptions {
   /** Controls whether Launch.IO records actions and allows to step forward and back in time. */
   enableTimeTravel: boolean;
 }
@@ -31,11 +31,7 @@ export interface ServiceApi {
     [serviceName: string]: any;
   };
   /** Combined `LaunchActions` of all sevices. */
-  actions: {
-    [serviceName: string]: {
-      [actionName: string]: LaunchAction;
-    };
-  };
+  actions: ServiceActions;
   /** Pure function used to return new state. */
   createReducer: any;
 }
@@ -73,12 +69,8 @@ export interface LaunchContext {
   /** Current state of the Launch.IO application. */
   state: any;
   /** Object containing access to all launch actions for each service. */
-  actions: {
-    [serviceName: string]: {
-      [actionName: string]: LaunchAction;
-    };
-  };
-  dispatch: (action: any) => void;
+  actions: LaunchActions;
+  launcher: (action: any) => void;
 }
 
 /**
@@ -116,11 +108,6 @@ export type ServiceAction = (
  * `Launch.IO` function to launch other service actions.
  */
 export type Launcher = (action: Action) => void;
-
-/**
- * Return value for the `Launch.IO` custom reducer.
- */
-export type LaunchDispatch = [any, (action: Action) => void];
 
 /**
  * Pure function used to return new state.

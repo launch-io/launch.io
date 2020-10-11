@@ -1,26 +1,26 @@
 /* eslint-disable react/prop-types */
-import { useLayoutEffect, useMemo } from "react";
-import createServiceApi from "../utils/createServiceApi";
-import { LaunchContext } from "../types";
-import { Observable } from "../utils/Observable";
-
-const _ctx: Observable<LaunchContext> = new Observable(null);
-export const getContextListener = () => _ctx;
+import createServiceApi from "./createServiceApi";
+import bindActions from "./bindActions";
+import { Service, LaunchOptions, Action } from "../types";
+import ctx from "./context";
 
 /**
  * Initialize a React application with Launch.IO.
  *
  * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (object of functions) properties.
- * @param {Object} options A `Launch.IO` `ServiceOptions` object.
+ * @param {Object} options A `Launch.IO` `LaunchOptions` object.
  * */
-export const initializeLaunch = (services, options) => {
+export const initializeLaunch = (
+  services: Service[],
+  options: LaunchOptions
+) => {
   const serviceApi = createServiceApi(services, options);
 
-  const dispatch = (action) => {
-    const prevCtx = _ctx.snapshot();
-    const newState = serviceApi.createReducer(dispatch)(prevCtx.state, action);
+  const launcher = (action: Action) => {
+    const prevCtx = ctx.snapshot();
+    const newState = serviceApi.createReducer(launcher)(prevCtx.state, action);
     if (newState !== prevCtx.state) {
-      _ctx.update({
+      ctx.update({
         ...prevCtx,
         state: newState,
       });
@@ -29,36 +29,9 @@ export const initializeLaunch = (services, options) => {
 
   const contextValue = {
     state: serviceApi.initialState,
-    actions: bindActions(serviceApi.actions, dispatch),
-    dispatch,
+    actions: bindActions(serviceApi.actions, launcher),
+    launcher,
   };
 
-  _ctx.update(contextValue);
-};
-
-export const useContextListener = (cb) => {
-  useLayoutEffect(() => {
-    const { disconnect } = getContextListener().subscribe(cb);
-
-    return () => {
-      disconnect();
-    };
-  }, [cb]);
-};
-
-export const bindActions = (unboundActions, dispatch) => {
-  return Object.keys(unboundActions).reduce(
-    (boundLaunchActions, serviceName) => {
-      boundLaunchActions[serviceName] = Object.keys(
-        unboundActions[serviceName]
-      ).reduce((serviceActions, serviceActionName) => {
-        serviceActions[serviceActionName] = (...args) =>
-          dispatch(unboundActions[serviceName][serviceActionName](...args));
-        return serviceActions;
-      }, {});
-
-      return boundLaunchActions;
-    },
-    {}
-  );
+  ctx.update(contextValue);
 };

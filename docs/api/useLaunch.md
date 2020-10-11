@@ -1,12 +1,12 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) `useLaunch(...)`
 
-A React hook that takes a `selector` function and returns an object, containing `state` and/or launch `actions` from [Services](./service.md), based on the selection within the `selector` function.
+A React hook that takes a `selector` function. The `selector` function receives a context argument and returns an object. The `selector` function should return `state` and/or launch `actions` from [Services](./service.md).
 
 `const selection = useLaunch({ state, actions} => ({ ... }));`
 
-[initializeLaunch](./initializeLaunch.md) creates an abstraction for the `state` and `actions` arguments from the `array` of [Services](./service.md) that were provided.
+[initializeLaunch](./initializeLaunch.md) creates an abstraction for the `state` and launch `actions` properties from the `array` of [Services](./service.md) that were provided.
 
-### `selector` Arguments
+### `selector` Context
 
 `state` **object**
 
@@ -24,22 +24,20 @@ import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
   const stepValue = 2;
-  const calculator = useLaunch(({ state, actions }) => ({
-    ...state.calculator,
-    ...actions.calculator,
-  }));
+  const state = useLaunch(({ state }) => state.calculator);
+  const actions = useLaunch(({ actions }) => actions.calculator);
 
   const handleIncrease = () => {
-    calculator.increase(stepValue);
+    actions.increase(stepValue);
   };
 
   const handleDecrease = () => {
-    calculator.decrease(stepValue);
+    actions.decrease(stepValue);
   };
 
   return (
     <div>
-      <p>Value: {calculator.value}</p>
+      <p>Value: {state.value}</p>
       <button type="button" onClick={handleIncrease}>
         Increase
       </button>

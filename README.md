@@ -63,28 +63,22 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
-  const calculator = useLaunch(({ state, actions }) => ({
-    ...state.calculator,
-    ...actions.calculator,
-  }));
+  const state = useLaunch(({ state }) => state.calculator);
+  const actions = useLaunch(({ actions }) => actions.calculator);
 
   return (
     <div>
-      <p>Value: {calculator.value}</p>
-      <button type="button" onClick={calculator.increase}>
+      <p>Value: {state.value}</p>
+      <button type="button" onClick={() => state.increase()}>
         Increase
       </button>
-      <button type="button" onClick={calculator.decrease}>
+      <button type="button" onClick={() => state.decrease()}>
         Decrease
       </button>
     </div>
   );
 };
 ```
-
-## Tell Me More
-
-Launch.IO relies on pure functions so it has the predictable state management and time travel debugging of [Redux](https://github.com/reduxjs/redux), except there is no boilerplate and it's not Redux.
 
 ## Documentation
 

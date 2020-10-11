@@ -1,5 +1,6 @@
 type Disconnecter = { disconnect: () => void };
-export class Observable<T> {
+
+export default class Observable<T> {
   private listeners = new Set<(value: T) => void>();
   constructor(protected value: T) {}
 

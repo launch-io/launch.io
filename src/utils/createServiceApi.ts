@@ -1,16 +1,16 @@
-import createReducer from "./reducer";
+import createReducer from "./createReducer";
 import history from "../services/history";
-import { Service, ServiceOptions, ServiceApi } from "../types";
+import { Service, LaunchOptions, ServiceApi } from "../types";
 
 /**
  * Takes an `array` of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component.
  * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (`object` of `functions`) properties.
- * @param {Object} options A `Launch.IO` `ServiceOptions` object.
+ * @param {Object} options A `Launch.IO` `LaunchOptions` object.
  * @param {Boolean} options.enableTimeTravel Enable Launch.IO Time Travel Debugging.
  */
 const createServiceApi = (
   services: Service[],
-  options: ServiceOptions = { enableTimeTravel: false }
+  options: LaunchOptions = { enableTimeTravel: false }
 ): ServiceApi => {
   const servicesToProcess: Service[] = [
       ...services,
@@ -68,11 +68,12 @@ const createServiceApi = (
   return {
     initialState,
     actions: allActions.launchActions,
-    createReducer: (dispatch) => {
+    createReducer: (launcher) => {
       return createReducer(
         allActions.launchActions,
         allActions.serviceActions,
-        dispatch
+        launcher,
+        options
       );
     },
   };

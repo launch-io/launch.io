@@ -1,12 +1,10 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
-import {
-  getContextListener,
-  useContextListener,
-} from "../utils/initializeLaunch";
+import ctx from "../utils/context";
+import useContextListener from "../utils/useContextListener";
 import { LaunchContext } from "../types";
 
 /**
- * A React hook that takes a `selector` function and returns a context object, containing Launch.IO state and/or actions, based on the selection within the `selector` function.
+ * A React hook that takes a `selector` function.  The selector function receives a context, containing `state` and `actions`, and it should return object containing Launch.IO state and/or actions.
  *
  * `const selection = useLaunch({ state, actions} => ({ ... }));`
  *
@@ -23,7 +21,7 @@ export const useLaunch = <T>(selector: (context: LaunchContext) => T): T => {
   const selectedStateRef = useRef();
   const selectorRef = useRef(selector);
   const [selectedState, setSelectedState] = useState<any>(() =>
-    selector(getContextListener().snapshot())
+    selector(ctx.snapshot())
   );
 
   useLayoutEffect(() => {

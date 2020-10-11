@@ -1,13 +1,13 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Action, LaunchAction, ServiceActions, Launcher } from "../types";
+import { Action, ServiceActions, LaunchActions } from "../types";
 
-const getNewState = (
+export default (
   initialState: any,
   actions: Action[],
   serviceActions: ServiceActions,
-  launchActions: any
+  launchActions: LaunchActions
 ): any => {
   const newState = { ...initialState };
 
@@ -24,5 +24,3 @@ const getNewState = (
 
   return newState;
 };
-
-export { getNewState };

@@ -1,6 +1,6 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) initializeLaunch
 
-`initializeLaunch` is used to initialize your React application with Launch.IO. It should be initialized before your application is first rendered.
+`initializeLaunch` is a function that is used to initialize your React application with Launch.IO. It should be called before your application is first rendered.
 
 ### Props
 

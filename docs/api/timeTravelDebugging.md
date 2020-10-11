@@ -21,16 +21,14 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const TimeTravel = (props) => {
-  const history = useLaunch(({ actions }) => ({
-    ...actions._history,
-  }));
+  const history = useLaunch(({ actions }) => actions._history);
 
   return (
     <div>
-      <button type="button" onClick={history.stepBack}>
+      <button type="button" onClick={() => history.stepBack()}>
         Rewind Time
       </button>
-      <button type="button" onClick={history.stepForward}>
+      <button type="button" onClick={() => history.stepForward()}>
         Fast Forward Time
       </button>
     </div>

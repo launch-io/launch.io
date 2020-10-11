@@ -1,8 +1,8 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ServiceActionContext, ServiceActions } from "../types";
-import { getNewState } from "../utils/helpers";
+import { ServiceActionContext } from "../types";
+import getNewState from "../utils/getNewState";
 
 const initialState = {
   initialGlobalState: null,
@@ -12,7 +12,7 @@ const initialState = {
 
 const actions = {
   stepBack: (
-    { state, actions }: ServiceActionContext,
+    { state }: ServiceActionContext,
     { serviceActions, boundActions }
   ): any => {
     if (state._history.past.length === 0) {
@@ -38,7 +38,7 @@ const actions = {
     };
   },
   stepForward: (
-    { state, actions }: ServiceActionContext,
+    { state }: ServiceActionContext,
     { serviceActions, boundActions }
   ): any => {
     if (state._history.future.length === 0) {

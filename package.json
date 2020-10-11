@@ -1,7 +1,7 @@
 {
   "name": "launch.io",
   "description": "Launch.IO is an Ultra Hip, Simple, and Fast, Time Traveling React State Management Library",
-  "version": "0.11.0",
+  "version": "0.11.1",
   "author": {
     "name": "Jeremiah Billmann",
     "email": "jbillmann@gmail.com",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jbillmann/launch.io.git"
+    "url": "https://github.com/launch-io/launch.io.git"
   },
   "license": "MIT",
   "keywords": [

@@ -2,14 +2,12 @@ import React, { useEffect } from "react";
 import { useLaunch } from "launch.io";
 
 const NameForm = () => {
-  const name = useLaunch(({ state, actions }) => ({
-    ...state.name,
-    ...actions.name,
-  }));
+  const state = useLaunch(({ state }) => state.name);
+  const actions = useLaunch(({ actions }) => actions.name);
 
   useEffect(() => {
-    name.fetchName();
-  }, [name.fetchName]);
+    actions.fetchName();
+  }, [actions]);
 
   useEffect(() => {
     console.log("NameForm -> RENDER");
@@ -21,22 +19,22 @@ const NameForm = () => {
         <div>
           <label>First Name</label>
           <input
-            value={name.firstName}
+            value={state.firstName}
             onChange={(e) => {
-              name.updateName({ firstName: e.target.value });
+              actions.updateName({ firstName: e.target.value });
             }}
           />
-          <h3>{name.firstName}</h3>
+          <h3>{state.firstName}</h3>
         </div>
         <div>
           <label>Last Name</label>
           <input
-            value={name.lastName}
+            value={state.lastName}
             onChange={(e) => {
-              name.updateName({ lastName: e.target.value });
+              actions.updateName({ lastName: e.target.value });
             }}
           />
-          <h3>{name.lastName}</h3>
+          <h3>{state.lastName}</h3>
         </div>
       </form>
     </div>

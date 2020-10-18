@@ -69,10 +69,10 @@ const CalculatorForm = () => {
   return (
     <div>
       <p>Value: {state.value}</p>
-      <button type="button" onClick={() => state.increase()}>
+      <button type="button" onClick={() => actions.increase()}>
         Increase
       </button>
-      <button type="button" onClick={() => state.decrease()}>
+      <button type="button" onClick={() => actions.decrease()}>
         Decrease
       </button>
     </div>

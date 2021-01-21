@@ -1,10 +1,27 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ServiceActionContext } from "../types";
+import { ServiceActionContext, ServiceActions, LaunchActions } from "../types";
 import getNewState from "../utils/getNewState";
 
-const initialState = {
+interface HistoryAction {
+  serviceName: string;
+  actionName: string;
+  payload: any;
+}
+
+interface HistoryActionContext {
+  newState: any;
+  action: HistoryAction;
+}
+
+interface HistoryState {
+  initialGlobalState: any;
+  past: HistoryAction[];
+  future: HistoryAction[];
+}
+
+const initialState: HistoryState = {
   initialGlobalState: null,
   past: [],
   future: [],
@@ -13,7 +30,10 @@ const initialState = {
 const actions = {
   stepBack: (
     { state }: ServiceActionContext,
-    { serviceActions, boundActions }
+    {
+      serviceActions,
+      boundActions,
+    }: { serviceActions: ServiceActions; boundActions: LaunchActions }
   ): any => {
     if (state._history.past.length === 0) {
       return state;
@@ -39,7 +59,10 @@ const actions = {
   },
   stepForward: (
     { state }: ServiceActionContext,
-    { serviceActions, boundActions }
+    {
+      serviceActions,
+      boundActions,
+    }: { serviceActions: ServiceActions; boundActions: LaunchActions }
   ): any => {
     if (state._history.future.length === 0) {
       return state;
@@ -64,7 +87,10 @@ const actions = {
       },
     };
   },
-  add: ({ state }: ServiceActionContext, newAction: any): any => {
+  add: (
+    { state }: ServiceActionContext,
+    newAction: HistoryActionContext
+  ): HistoryState => {
     return {
       initialGlobalState: state._history.initialGlobalState
         ? state._history.initialGlobalState

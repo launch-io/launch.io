@@ -11,6 +11,14 @@ import {
 import history from "../services/history";
 import bindActions from "../utils/bindActions";
 
+const checkIsPromise = (value: any) => {
+  return (
+    !!value &&
+    (typeof value === "object" || typeof value === "function") &&
+    typeof value.then === "function"
+  );
+};
+
 const reducer = (
   launchActions: LaunchActions,
   serviceActions: ServiceActions,
@@ -81,13 +89,5 @@ export default (
     options,
     state,
     action
-  );
-};
-
-const checkIsPromise = (value: any) => {
-  return (
-    !!value &&
-    (typeof value === "object" || typeof value === "function") &&
-    typeof value.then === "function"
   );
 };

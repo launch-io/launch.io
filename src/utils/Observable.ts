@@ -8,13 +8,15 @@ export default class Observable<T> {
     this.value = value;
     this.emit();
   }
-  update(value: T) {
-    this._update(value);
-  }
+
   protected emit() {
     for (const listener of this.listeners) {
       listener(this.snapshot());
     }
+  }
+
+  update(value: T) {
+    this._update(value);
   }
 
   snapshot(): T {

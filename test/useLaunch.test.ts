@@ -50,6 +50,12 @@ describe("useLaunch tests", () => {
     });
 
     expect(stateResult.current.value).toBe(1);
+
+    act(() => {
+      actionResult.current.decrease();
+    });
+
+    expect(stateResult.current.value).toBe(0);
   });
 
   it("verifies that it launches time travel actions", () => {
@@ -62,6 +68,12 @@ describe("useLaunch tests", () => {
 
     act(() => {
       historyActionResult.current.stepBack();
+    });
+
+    expect(stateResult.current.value).toBe(1);
+
+    act(() => {
+      historyActionResult.current.stepForward();
     });
 
     expect(stateResult.current.value).toBe(0);

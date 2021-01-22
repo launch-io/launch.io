@@ -12,7 +12,7 @@ The array of application [Services](./service.md). Each service object will cons
 
 Contains the Launch.IO configuration properties:
 
-- `enableTimeTravel` (**boolean**) indicates whether or not time travel debugging is enabled. This has a default value of `false` and it should not be enabled in non-development environments.
+- `enableTimeTravel` (**boolean**) indicates whether or not [time travel debugging](./timeTravelDebugging.md) is enabled. This has a default value of `false` and it should not be enabled in non-development environments.
 
 ### Example
 

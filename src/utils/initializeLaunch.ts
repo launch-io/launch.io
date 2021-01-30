@@ -12,7 +12,7 @@ import ctx from "./context";
  * */
 export const initializeLaunch = (
   services: Service[],
-  options: LaunchOptions
+  options: LaunchOptions = { enableTimeTravel: false }
 ) => {
   const serviceApi = createServiceApi(services, options);
 

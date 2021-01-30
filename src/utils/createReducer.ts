@@ -66,6 +66,11 @@ const reducer = (
             actionName: action.actionName,
             payload: action.payload,
           },
+          timeTravelActionContext: {
+            serviceActions,
+            boundActions,
+          },
+          timeTravelHistoryLimit: options.timeTravelHistoryLimit,
         }
       );
     }

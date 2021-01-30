@@ -2,21 +2,28 @@ import createReducer from "./createReducer";
 import history from "../services/history";
 import { Service, LaunchOptions, ServiceApi } from "../types";
 
+const TIME_TRAVEL_HISTORY_LIMIT = 50;
+
 /**
  * Takes an `array` of application services and creates a Launch.IO service API abstraction for the Launch.IO Provider component.
  * @param {Array} services An `array` of application services.  Each service object will consist of `name` (`string`), `initialState` (`object`), and `actions` (`object` of `functions`) properties.
  * @param {Object} options A `Launch.IO` `LaunchOptions` object.
  * @param {Boolean} options.enableTimeTravel Enable Launch.IO Time Travel Debugging.
+ * @param {Boolean} options.timeTravelHistoryLimit Number of Launch.IO time travel actions that are stored in history.
  */
 const createServiceApi = (
   services: Service[],
-  options: LaunchOptions = { enableTimeTravel: false }
+  options: LaunchOptions
 ): ServiceApi => {
   const servicesToProcess: Service[] = [
       ...services,
       ...(options.enableTimeTravel ? [history] : []),
     ],
     initialState = {};
+
+  if (!options.timeTravelHistoryLimit) {
+    options.timeTravelHistoryLimit = TIME_TRAVEL_HISTORY_LIMIT;
+  }
 
   const allActions = servicesToProcess.reduce(
     (allServices, service) => {

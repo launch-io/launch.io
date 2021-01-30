@@ -10,9 +10,16 @@ interface HistoryAction {
   payload: any;
 }
 
-interface HistoryActionContext {
+interface HistoryAddActionContext {
   newState: any;
   action: HistoryAction;
+  timeTravelActionContext: HistoryTimeTravelActionContext;
+  timeTravelHistoryLimit: number;
+}
+
+interface HistoryTimeTravelActionContext {
+  serviceActions: ServiceActions;
+  boundActions: LaunchActions;
 }
 
 interface HistoryState {
@@ -30,10 +37,7 @@ const initialState: HistoryState = {
 const actions = {
   stepBack: (
     { state }: ServiceActionContext,
-    {
-      serviceActions,
-      boundActions,
-    }: { serviceActions: ServiceActions; boundActions: LaunchActions }
+    { serviceActions, boundActions }: HistoryTimeTravelActionContext
   ): any => {
     if (state._history.past.length === 0) {
       return state;
@@ -59,10 +63,7 @@ const actions = {
   },
   stepForward: (
     { state }: ServiceActionContext,
-    {
-      serviceActions,
-      boundActions,
-    }: { serviceActions: ServiceActions; boundActions: LaunchActions }
+    { serviceActions, boundActions }: HistoryTimeTravelActionContext
   ): any => {
     if (state._history.future.length === 0) {
       return state;
@@ -89,13 +90,25 @@ const actions = {
   },
   add: (
     { state }: ServiceActionContext,
-    newAction: HistoryActionContext
+    newAction: HistoryAddActionContext
   ): HistoryState => {
     return {
       initialGlobalState: state._history.initialGlobalState
-        ? state._history.initialGlobalState
+        ? state._history.past.length === newAction.timeTravelHistoryLimit
+          ? getNewState(
+              state._history.initialGlobalState,
+              [state._history.past[0]],
+              newAction.timeTravelActionContext.serviceActions,
+              newAction.timeTravelActionContext.boundActions
+            )
+          : state._history.initialGlobalState
         : state,
-      past: [...state._history.past, newAction.action],
+      past: [
+        ...state._history.past.slice(
+          -1 * (newAction.timeTravelHistoryLimit - 1)
+        ),
+        newAction.action,
+      ],
       future: [],
     };
   },

@@ -16,7 +16,10 @@ const calculatorService = {
 };
 
 beforeAll(() => {
-  initializeLaunch([calculatorService], { enableTimeTravel: true });
+  initializeLaunch([calculatorService], {
+    enableTimeTravel: true,
+    timeTravelHistoryLimit: 5,
+  });
 });
 
 describe("useLaunch tests", () => {
@@ -77,5 +80,36 @@ describe("useLaunch tests", () => {
     });
 
     expect(stateResult.current.value).toBe(0);
+  });
+
+  it("verifies that it restricts the time travel history limit", () => {
+    const { result: actionResult } = renderHook(() =>
+      useLaunch(({ actions }) => actions.calculator)
+    );
+    const { result: stateResult } = renderHook(() =>
+      useLaunch(({ state }) => state.calculator)
+    );
+    const { result: historyActionResult } = renderHook(() =>
+      useLaunch(({ actions }) => actions._history)
+    );
+
+    act(() => {
+      // 6 actions to increase the value to 6
+      actionResult.current.increase();
+      actionResult.current.increase();
+      actionResult.current.increase();
+      actionResult.current.increase();
+      actionResult.current.increase();
+      actionResult.current.increase();
+      // 6 time travel steps back, but the limit of 5 should have a value of 1
+      historyActionResult.current.stepBack();
+      historyActionResult.current.stepBack();
+      historyActionResult.current.stepBack();
+      historyActionResult.current.stepBack();
+      historyActionResult.current.stepBack();
+      historyActionResult.current.stepBack();
+    });
+
+    expect(stateResult.current.value).toBe(1);
   });
 });

@@ -5,7 +5,9 @@
  */
 export interface LaunchOptions {
   /** Controls whether Launch.IO records actions and allows to step forward and back in time. */
-  enableTimeTravel: boolean;
+  enableTimeTravel?: boolean;
+  /** Controls how many time travel actions are stored in history by Launch.IO. */
+  timeTravelHistoryLimit?: number;
 }
 
 /**

@@ -14,6 +14,8 @@ Contains the Launch.IO configuration properties:
 
 - `enableTimeTravel` (**boolean**) indicates whether or not [time travel debugging](./timeTravelDebugging.md) is enabled. This has a default value of `false` and it should not be enabled in non-development environments.
 
+- `timeTravelHistoryLimit` (**number**) indicates how many time travel actions are stored in history. This has a default value of 50.
+
 ### Example
 
 ```jsx

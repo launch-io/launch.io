@@ -9,7 +9,7 @@ Launch.IO is an Ultra Hip, Simple, and Fast, Time Traveling React State Manageme
 
 It provides the means to easily and consistently split up your application state into different services. Create actions within those services that will predictably update your application state time and time again. (Batteries and [Time Travel Debugging](./docs/api/timeTravelDebugging.md) are included.)
 
-You probably don't need all the overhead and alll of the features of the other state management libraries. You just need Launch.IO and some good ice cream.
+You probably don't need the overhead and extended features of other state management libraries. You just need Launch.IO and some good ice cream.
 
 Simple. Fast. Tiny.
 

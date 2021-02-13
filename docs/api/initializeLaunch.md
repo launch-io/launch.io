@@ -30,8 +30,8 @@ const calculatorService = {
   },
 
   actions: {
-    increase: ({ state }) => ({ value: state.value + 1 }),
-    decrease: ({ state }) => ({ value: state.value - 1 }),
+    increase: ({ state }, payload) => ({ value: state.value + payload }),
+    decrease: ({ state }, payload) => ({ value: state.value - payload }),
   },
 };
 

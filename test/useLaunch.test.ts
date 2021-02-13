@@ -2,6 +2,8 @@ import { renderHook, act } from "@testing-library/react-hooks";
 import { initializeLaunch } from "../src/utils/initializeLaunch";
 import { useLaunch } from "../src/hooks/useLaunch";
 
+const calculatorStep = 1;
+
 const calculatorService = {
   name: "calculator",
 
@@ -10,8 +12,12 @@ const calculatorService = {
   },
 
   actions: {
-    increase: ({ state }) => ({ value: state.value + 1 }),
-    decrease: ({ state }) => ({ value: state.value - 1 }),
+    increase: ({ state }, payload: number) => ({
+      value: state.value + payload,
+    }),
+    decrease: ({ state }, payload: number) => ({
+      value: state.value - payload,
+    }),
   },
 };
 
@@ -49,13 +55,13 @@ describe("useLaunch tests", () => {
     );
 
     act(() => {
-      actionResult.current.increase();
+      actionResult.current.increase(calculatorStep);
     });
 
     expect(stateResult.current.value).toBe(1);
 
     act(() => {
-      actionResult.current.decrease();
+      actionResult.current.decrease(calculatorStep);
     });
 
     expect(stateResult.current.value).toBe(0);
@@ -95,12 +101,12 @@ describe("useLaunch tests", () => {
 
     act(() => {
       // 6 actions to increase the value to 6
-      actionResult.current.increase();
-      actionResult.current.increase();
-      actionResult.current.increase();
-      actionResult.current.increase();
-      actionResult.current.increase();
-      actionResult.current.increase();
+      actionResult.current.increase(calculatorStep);
+      actionResult.current.increase(calculatorStep);
+      actionResult.current.increase(calculatorStep);
+      actionResult.current.increase(calculatorStep);
+      actionResult.current.increase(calculatorStep);
+      actionResult.current.increase(calculatorStep);
       // 6 time travel steps back, but the limit of 5 should have a value of 1
       historyActionResult.current.stepBack();
       historyActionResult.current.stepBack();

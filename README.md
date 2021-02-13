@@ -23,6 +23,8 @@ npm install launch.io
 
 ## Getting Started
 
+You can find a [working example](./example), of below, within this repository.
+
 Create your application services (as many as you'd like!). Each service should have a `name`, `initialState`, and a set of `actions`.
 
 ```javascript
@@ -35,8 +37,8 @@ const calculatorService = {
 
   // It is recommended that you do not mutate the incoming state; instead return a brand new state.
   actions: {
-    increase: ({ state }) => ({ value: state.value + 1 }),
-    decrease: ({ state }) => ({ value: state.value - 1 }),
+    increase: ({ state }, payload) => ({ value: state.value + payload }),
+    decrease: ({ state }, payload) => ({ value: state.value - payload }),
   },
 };
 ```
@@ -63,16 +65,17 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
+  const calculatorStep = 2;
   const state = useLaunch(({ state }) => state.calculator);
   const actions = useLaunch(({ actions }) => actions.calculator);
 
   return (
     <div>
       <p>Value: {state.value}</p>
-      <button type="button" onClick={() => actions.increase()}>
+      <button type="button" onClick={() => actions.increase(calculatorStep)}>
         Increase
       </button>
-      <button type="button" onClick={() => actions.decrease()}>
+      <button type="button" onClick={() => actions.decrease(calculatorStep)}>
         Decrease
       </button>
     </div>

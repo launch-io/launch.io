@@ -23,16 +23,16 @@ import React from "react";
 import { useLaunch } from "launch.io";
 
 const CalculatorForm = () => {
-  const stepValue = 2;
+  const calculatorStep = 2;
   const state = useLaunch(({ state }) => state.calculator);
   const actions = useLaunch(({ actions }) => actions.calculator);
 
   const handleIncrease = () => {
-    actions.increase(stepValue);
+    actions.increase(calculatorStep);
   };
 
   const handleDecrease = () => {
-    actions.decrease(stepValue);
+    actions.decrease(calculatorStep);
   };
 
   return (

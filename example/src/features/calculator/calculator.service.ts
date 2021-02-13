@@ -7,8 +7,8 @@ const initialState: CalculatorState = {
 };
 
 const actions = {
-  increase: ({ state }) => ({ value: state.value + 1 }),
-  decrease: ({ state }) => ({ value: state.value - 1 }),
+  increase: ({ state }, payload: number) => ({ value: state.value + payload }),
+  decrease: ({ state }, payload: number) => ({ value: state.value - payload }),
 };
 
 export default {

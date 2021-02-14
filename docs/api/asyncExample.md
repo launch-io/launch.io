@@ -1,10 +1,10 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) Async Example
 
-There are many times that you'll want to make `async`/`await` calls in conjunction with your Launch.IO service actions. You don't need to thunk (get it?!) about this as it can be done just like one would expect.
+There are many times that you'll want to make `async`/`await` calls in conjunction with your Launch.IO service actions. This can be done just like one would expect.
 
 ### Tips
 
-Remember that Launch.IO is a state mangement library; managing state is its only focus. It doesn't care about anything else. Fetching or posting to an API, for example, is independent of Launch.IO.
+Remember that Launch.IO is a state management library; managing state is its only focus. It doesn't care about anything else. Fetching or posting to an API, for example, is independent of Launch.IO.
 
 ### Example
 

@@ -4,7 +4,7 @@
 
 #### Services
 
-This is an object that contains a slice of the application state that can only be changed by a Service Actions within. All of the Services operate independent of one another, on their own state, but collectively represent the entire application state.
+This is an object that contains a slice of the application state that can only be changed by a Service Actions within. All of the Services operate independent of one another, on their own Service state, but collectively all of these Services represent the entire application state.
 
 #### Service Action
 

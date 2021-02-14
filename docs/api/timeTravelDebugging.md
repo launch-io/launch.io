@@ -2,7 +2,7 @@
 
 Launch.IO has built-in time travel debugging.
 
-It is able to do so because it relies on pure functions ([service actions](./service.md)). This funcionality allows for the application to step back and forward in time. Changing state, regardless of which point in time, will clear any pending future actions.
+It is able to do so because it relies on pure functions ([service actions](./service.md)). This functionality allows for the application to step back and forward in time. Changing state, regardless of which point in time, will clear any pending future actions.
 
 Anytime the application steps forward or backwards in time, Launch.IO will replay all actions (to the point in time) against the initial state of the application.
 

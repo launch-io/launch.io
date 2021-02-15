@@ -1,5 +1,9 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) initializeLaunch
 
+Back to [API Reference](./index.md).
+
+---
+
 `initializeLaunch` is a function that is used to initialize your React application with Launch.IO. It should be called before your application is first rendered.
 
 ### Props

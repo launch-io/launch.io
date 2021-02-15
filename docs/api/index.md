@@ -1,6 +1,6 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) API Reference
 
-Launch.IO relies on pure functions so it has the predictable state management and time travel debugging.
+Launch.IO relies on pure functions so it has predictable state management and it can provide time travel debugging.
 
 Its goals are to be tiny, fast, and super simple to use while still being an extremely capable and scalable state management library.
 

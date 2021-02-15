@@ -1,10 +1,14 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) Time Travel Debugging
 
+Back to [API Reference](./index.md).
+
+---
+
 Launch.IO has built-in time travel debugging.
 
 It is able to do so because it relies on pure functions ([service actions](./service.md)). This functionality allows for the application to step back and forward in time. Changing state, regardless of which point in time, will clear any pending future actions.
 
-Anytime the application steps forward or backwards in time, Launch.IO will replay all actions (to the point in time) against the initial state of the application.
+Anytime the application steps forward or backwards in time, Launch.IO will replay all actions (to the point in time) against the initial state of the application or earliest state depending on the value for `timeTravelHistoryLimit`.
 
 This feature is not intended for a production environment; it is intended for a development environments.
 

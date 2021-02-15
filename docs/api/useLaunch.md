@@ -1,5 +1,9 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) `useLaunch(...)`
 
+Back to [API Reference](./index.md).
+
+---
+
 A React hook that takes a `selector` function. The `selector` function receives a context argument and returns an object. The `selector` function should return `state` and/or launch `actions` from [Services](./service.md).
 
 `const selection = useLaunch({ state, actions} => ({ ... }));`

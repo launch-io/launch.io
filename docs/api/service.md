@@ -1,8 +1,10 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) Service
 
-Please be sure to have reviewd [terminology](./terminology.md) before reviewing services.
+Back to [API Reference](./index.md).
 
 ---
+
+Please be sure to have reviewed the [terminology](./terminology.md) before reviewing the service documentation below.
 
 Each service object must contain `name` (**string**), `initialState` (**object**), and `actions` (**object**) properties.
 
@@ -10,7 +12,7 @@ Each service object must contain `name` (**string**), `initialState` (**object**
 
 `name` **string**
 
-The name of the service and it also defines how to access `state` for this service from the [`useLaunch`](./useLaunch.md) hook.
+The name of the service and it defines how to access `state` for this service from the [`useLaunch`](./useLaunch.md) hook.
 
 `initialState` **object**
 

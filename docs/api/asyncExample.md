@@ -1,5 +1,9 @@
 # ![Launch.IO Logo](../../logo/logo-small.png) Async Example
 
+Back to [API Reference](./index.md).
+
+---
+
 There are many times that you'll want to make `async`/`await` calls in conjunction with your Launch.IO service actions. This can be done just like one would expect.
 
 ### Tips

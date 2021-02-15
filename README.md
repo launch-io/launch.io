@@ -23,7 +23,7 @@ npm install launch.io
 
 ## Getting Started
 
-You can find a [working example](./example), of below, within this repository.
+(Run the example below in [CodeSandbox](https://codesandbox.io/s/launchio-example-fn03e) or locally using the example in [this repository](./example)).
 
 Create your application services (as many as you'd like!). Each service should have a `name`, `initialState`, and a set of `actions`.
 

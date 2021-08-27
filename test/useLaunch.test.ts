@@ -1,6 +1,7 @@
-import { renderHook, act } from "@testing-library/react-hooks";
-import { initializeLaunch } from "../src/utils/initializeLaunch";
+import { act,renderHook } from "@testing-library/react-hooks";
+
 import { useLaunch } from "../src/hooks/useLaunch";
+import { initializeLaunch } from "../src/utils/initializeLaunch";
 
 const calculatorStep = 1;
 

@@ -1,8 +1,8 @@
 /* eslint-disable react/prop-types */
-import createServiceApi from "./createServiceApi";
+import { Action,LaunchOptions, Service } from "../types";
 import bindActions from "./bindActions";
-import { Service, LaunchOptions, Action } from "../types";
 import ctx from "./context";
+import createServiceApi from "./createServiceApi";
 
 /**
  * Initialize a React application with Launch.IO.
@@ -13,7 +13,7 @@ import ctx from "./context";
 export const initializeLaunch = (
   services: Service[],
   options: LaunchOptions = { enableTimeTravel: false }
-) => {
+): void => {
   const serviceApi = createServiceApi(services, options);
 
   const launcher = (action: Action) => {

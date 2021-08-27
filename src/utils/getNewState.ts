@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { Action, ServiceActions, LaunchActions } from "../types";
+import { Action, LaunchActions,ServiceActions } from "../types";
 
 export default (
   initialState: any,

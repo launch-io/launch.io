@@ -1,6 +1,6 @@
-import createReducer from "./createReducer";
 import history from "../services/history";
-import { Service, LaunchOptions, ServiceApi } from "../types";
+import { LaunchOptions, Service, ServiceApi } from "../types";
+import createReducer from "./createReducer";
 
 const TIME_TRAVEL_HISTORY_LIMIT = 50;
 

@@ -1,7 +1,8 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
+
+import { LaunchContext } from "../types";
 import ctx from "../utils/context";
 import useContextListener from "../utils/useContextListener";
-import { LaunchContext } from "../types";
 
 /**
  * A React hook that takes a `selector` function.  The selector function receives a context, containing `state` and `actions`, and it should return object containing Launch.IO state and/or actions.

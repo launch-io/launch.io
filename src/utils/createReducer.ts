@@ -1,14 +1,14 @@
 /* eslint-disable @typescript-eslint/explicit-module-boundary-types */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import history from "../services/history";
 import {
-  LaunchActions,
-  ServiceActions,
   Action,
+  LaunchActions,
   Launcher,
   LaunchOptions,
+  ServiceActions,
 } from "../types";
-import history from "../services/history";
 import bindActions from "../utils/bindActions";
 
 const checkIsPromise = (value: any) => {
